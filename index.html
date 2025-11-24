@@ -4,13 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SCiPnet V5.4 // ADMINISTRATIVE ACCESS</title>
-    <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Google Fonts: Tech Mono -->
     <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap" rel="stylesheet">
     
     <style>
-        /* --- CORE VARIABLES --- */
         :root {
             --bg-image: url('https://github.com/Bapoooossssaaaa/WLOC/blob/main/Untitled%20design%20(5).gif?raw=true');
             --login-overlay: url('https://github.com/Bapoooossssaaaa/WLOC/blob/main/Untitled%20design%20(27).png?raw=true');
@@ -25,7 +22,6 @@
 
         * { box-sizing: border-box; margin: 0; padding: 0; user-select: none; }
 
-        /* Custom Scrollbar */
         ::-webkit-scrollbar { width: 8px; }
         ::-webkit-scrollbar-track { background: #111; }
         ::-webkit-scrollbar-thumb { background: var(--admin-solid); }
@@ -44,7 +40,6 @@
             color: var(--text-main);
         }
 
-        /* --- SCANLINES EFFECT --- */
         .scanlines {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
@@ -55,7 +50,6 @@
         }
         @keyframes flicker { 0% { opacity: 0.6; } 50% { opacity: 0.65; } 100% { opacity: 0.6; } }
 
-        /* --- LAYOUT --- */
         .screen {
             position: absolute; top: 0; left: 0; width: 100%; height: 100%;
             display: none; flex-direction: column;
@@ -75,7 +69,6 @@
             height: 100%; width: 100%; flex-direction: column;
         }
 
-        /* --- TOP BAR --- */
         .top-bar {
             position: absolute; top: 0; left: 0; width: 100%; height: 50px;
             display: flex; align-items: center; justify-content: space-between;
@@ -88,7 +81,6 @@
 
         .time-display { font-size: 0.9rem; opacity: 0.8; }
         
-        /* INVERT LOGO TO WHITE */
         .logo-white {
             height: 35px; 
             margin-right: 15px;
@@ -96,14 +88,12 @@
         }
         .bar-left { display: flex; align-items: center; }
 
-        /* --- REMOTE SCREEN --- */
         #remote-screen { background: #000; color: #fff; z-index: 1000; }
         .connection-icon { font-size: 4rem; margin-bottom: 2rem; color: #fff; }
         .progress-container { width: 300px; height: 4px; background: #333; margin: 20px 0; }
         .progress-bar { width: 0%; height: 100%; background: #fff; transition: width 0.2s; }
         #remote-screen h2 { color: #fff; }
 
-        /* --- BIOS SCREEN --- */
         #bios-screen {
             background-color: #050505; color: #fff;
             padding: 0; font-size: 1rem; z-index: 900;
@@ -127,7 +117,6 @@
         }
         @keyframes fadeIn { to { opacity: 1; } }
 
-        /* --- LOGIN SCREEN --- */
         #login-screen { z-index: 800; }
         .login-box {
             position: relative;
@@ -163,7 +152,6 @@
         .btn:hover { background: #fff; box-shadow: 0 0 15px rgba(255,255,255,0.5); }
         .btn:active { transform: scale(0.98); }
 
-        /* --- NETWORK SCREEN --- */
         #network-screen { z-index: 700; background: rgba(0,0,0,0.85); backdrop-filter: blur(8px); }
         .network-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; z-index: 2; }
         .net-card {
@@ -177,7 +165,6 @@
         }
         .net-icon { height: 80px; margin-bottom: 1.5rem; }
 
-        /* --- DATABASE SCREEN --- */
         #database-screen { z-index: 600; padding-top: 50px; }
         .db-container {
             width: 90%; height: 85%;
@@ -190,7 +177,6 @@
             align-items: center; font-size: 1.1rem; color: #888; cursor: not-allowed; opacity: 0.7;
         }
         .file-row.selectable { cursor: pointer; transition: 0.2s; opacity: 1; }
-        /* Green Highlight for Kael */
         .file-row.selectable.highlight-green {
             background: rgba(0, 255, 0, 0.05);
             border-left: 4px solid lime;
@@ -201,7 +187,6 @@
             color: #fff; padding-left: 20px; 
         }
 
-        /* --- FILE VIEWER --- */
         #file-screen { z-index: 500; padding-top: 50px; }
         .file-interface {
             width: 100%; height: calc(100vh - 50px);
@@ -209,7 +194,6 @@
             backdrop-filter: blur(20px); color: #111;
         }
         
-        /* Sidebar */
         .file-sidebar {
             width: 320px; background: rgba(220, 220, 220, 0.9);
             border-right: 1px solid #999; padding: 2rem;
@@ -220,7 +204,6 @@
             border: 4px solid var(--admin-solid); object-fit: cover;
         }
         
-        /* Main Content */
         .file-main { flex: 1; display: flex; flex-direction: column; position: relative; overflow: hidden; }
         .logo-bg-watermark {
             position: absolute; 
@@ -252,9 +235,8 @@
         
         p { margin-bottom: 1.5rem; text-align: justify; }
 
-        /* --- STYLING EXTRAS --- */
-        .hl { color: #b30000; font-weight: bold; } /* Highlight Red */
-        .hl-org { color: #00008b; font-weight: bold; } /* Highlight Org/Blue */
+        .hl { color: #b30000; font-weight: bold; } 
+        .hl-org { color: #00008b; font-weight: bold; } 
         .hl-date { color: #333; font-weight: bold; border-bottom: 1px dotted #555; }
         
         .quote-box {
@@ -277,7 +259,6 @@
             border: 1px solid #000;
         }
 
-        /* Medical Log Specifics */
         .med-header {
             border: 2px solid var(--medical-blue);
             background: rgba(0, 170, 255, 0.1);
@@ -287,7 +268,7 @@
             color: var(--medical-blue);
         }
         .med-grid {
-            position: relative; /* Added for absolute positioning of stamp */
+            position: relative; 
             display: grid;
             grid-template-columns: 150px 1fr;
             gap: 10px;
@@ -300,12 +281,11 @@
         .med-label { font-weight: bold; color: var(--medical-blue); text-align: right; padding-right: 15px; }
         .med-val { color: #333; }
         
-        /* Updated Stamp Style */
         .med-stamp {
             position: absolute;
             top: 30px;
             right: 40px;
-            border: 4px solid green; /* Changed to green or keep red as per preference, usually cleared is good */
+            border: 4px solid green; 
             color: green; 
             padding: 10px 20px; 
             transform: rotate(-10deg); 
@@ -322,7 +302,6 @@
 
     <div class="scanlines"></div>
 
-    <!-- SCREEN 0: REMOTE -->
     <div id="remote-screen" class="screen active full-center">
         <i class="fas fa-terminal connection-icon" style="animation: pulse 2s infinite;"></i>
         <h2 style="font-weight:normal; letter-spacing:2px; color:#fff;">REMOTE UPLINK INITIATED</h2>
@@ -330,12 +309,10 @@
         <div id="remote-text" style="color:white;">Handshake...</div>
     </div>
 
-    <!-- SCREEN 1: BIOS -->
     <div id="bios-screen" class="screen">
         <div id="bios-content"></div>
     </div>
 
-    <!-- SCREEN 2: LOGIN -->
     <div id="login-screen" class="screen full-center">
         <div class="top-bar login-top">
             <div class="bar-left">
@@ -364,7 +341,6 @@
         </div>
     </div>
 
-    <!-- SCREEN 3: NETWORK -->
     <div id="network-screen" class="screen full-center">
         <div class="top-bar login-top">
             <div class="bar-left">
@@ -393,7 +369,6 @@
         </div>
     </div>
 
-    <!-- SCREEN 4: DATABASE -->
     <div id="database-screen" class="screen full-center">
         <div class="top-bar site-top">
             <div class="bar-left">
@@ -409,12 +384,10 @@
                 <div id="db-status" style="color:lime;">CONNECTED</div>
             </div>
             <div style="flex:1; overflow-y:auto; padding:1rem;" id="file-list">
-                <!-- Populated by JS -->
             </div>
         </div>
     </div>
 
-    <!-- SCREEN 5: FILE VIEWER -->
     <div id="file-screen" class="screen">
         <div class="top-bar site-top">
             <div class="bar-left">
@@ -425,7 +398,6 @@
         </div>
 
         <div class="file-interface">
-            <!-- Sidebar -->
             <div class="file-sidebar">
                 <div class="profile-pic">
                     <img src="https://github.com/Bapoooossssaaaa/WLOC/blob/main/Screenshot%202025-11-24%20010528.png?raw=true" style="width:100%; height:100%; object-fit:cover;">
@@ -442,9 +414,7 @@
                 </div>
             </div>
 
-            <!-- Main Content -->
             <div class="file-main">
-                <!-- Background Logo Centered -->
                 <img src="https://github.com/Bapoooossssaaaa/WLOC/blob/main/Admin_old.webp?raw=true" class="logo-bg-watermark">
                 
                 <div class="file-top-nav">
@@ -455,7 +425,6 @@
                     <div class="tab-btn" onclick="switchTab('tab-morph')">Morph [WIP]</div>
                 </div>
 
-                <!-- TAB: GENERAL -->
                 <div id="tab-gen" class="tab-content active">
                     <h1>KAEL “NICHOLAS” CHARLES</h1>
                     <p><strong>Administrative Department, Installation Command, Site-45.</strong></p>
@@ -473,7 +442,6 @@
                     </div>
                 </div>
 
-                <!-- TAB: BACKGROUND -->
                 <div id="tab-back" class="tab-content">
                     <h2>Short Birth Story</h2>
                     <p><span class="hl">Kael Nicholas Charles</span> was born on <span class="hl-date">August 12, 1986</span>, in <span class="hl-date">Fairfax, VA</span>, to Thomas and Ellie Charles in an upper-class home. He had a brother named Reese who was in college at the time of his birth. His father was a retired <span class="hl-org">GS-14 Logistics Officer</span> for the <span class="hl-org">U.S. Department of Defense</span>, and his mother was a Public School Administrator in Fairfax County; both laid their years of knowledge and work onto him throughout his younger life. During his childhood, he didn’t see his brother too often, even after he finished college, nor did his parents talk about him much. Kael was saddened that he had never once gotten to see his older brother, which laid weight on him throughout his life. His father was mostly around and gave him knowledge of his days in the <span class="hl-org">Department of Defense</span>, especially regarding what he hated about his work.</p>
@@ -482,7 +450,6 @@
                     <p>Kael attended <span class="hl-date">Woodson High School</span> and was keen on becoming a part of the school’s Student Government. He succeeded in this and even served as the President of Student Government during his junior year of high school. Academically, Kael was exceedingly easy to work with and did well in all of the classes he attended—some honors, some accelerated. After graduating high school in 2004, he was able to get a scholarship to <span class="hl-org">George Mason University</span>, earning a Master’s in Organization Development & Knowledge Management by 2010. He spent the next decade working for a private sector major defense contractor, <span class="hl-org">Booz Allen Hamilton</span>, in McLean, VA. He specialized in internal auditing and human resources for classified government projects. In 2016, after five years of strategic operations, Kael obtained his <span class="hl">Senior Certified Professional</span> credential from the <span class="hl-org">Society for Human Resource Management</span>. He also notably spearheaded a "Compliance Overhaul" for a 500-person logistics division, restructuring wage-and-hour auditing processes to eliminate legal liabilities before a federal review.</p>
                 </div>
 
-                <!-- TAB: RECRUITMENT -->
                 <div id="tab-rec" class="tab-content">
                     <h2>Foundation Discovery & Recruitment</h2>
                     <p>By 2020, near the end of his contract, he caught the eye of an SCP Foundation Agent working deep cover in <span class="hl-org">Booz Allen Hamilton</span>: one <span class="hl">Alex V.</span>, disguised as a Junior IT Support Technician, but in reality, a member of the <span class="hl-org">Foundation’s Intelligence Network</span>. He wasn't there to recruit Kael initially; he was embedded in Booz Allen Hamilton to monitor a different executive suspected of selling classified logistics data to the <span class="hl">Chaos Insurgency</span>. That Senior Executive also fell under Kael's scrutiny during one of Kael’s audits. Kael was able to determine he was using a "Ghost Employee" scheme, creating fake employees on the payroll to funnel cash.</p>
@@ -500,7 +467,6 @@
                     <p><span class="hl">Reese</span> had actually been working for the Foundation after college and seemed to have made quite a name for himself as the <span class="hl-org">Site Director for Site-15</span>. Kael was able to gain a spot serving under him and was able to converse with him plenty for the next four years of his employment in the Foundation’s Administrative Department. He didn’t do anything too important, just managing personnel files and paychecks, as well as dealing with concerns whenever necessary.</p>
                 </div>
 
-                <!-- TAB: MEDICAL -->
                 <div id="tab-inc" class="tab-content">
                     
                     <div class="med-header">
@@ -543,7 +509,6 @@
                     </div>
                 </div>
 
-                <!-- TAB: MORPH -->
                 <div id="tab-morph" class="tab-content">
                     <div class="full-center" style="height:50vh; border:2px dashed #555; color:#888;">
                         <i class="fas fa-tools fa-3x" style="margin-bottom:20px;"></i>
@@ -561,12 +526,10 @@
         const wait = (ms) => new Promise(resolve => setTimeout(resolve, ms));
         let currentScreen = 'remote-screen';
 
-        // --- UTILS ---
         function switchScreen(nextId) {
             const current = document.getElementById(currentScreen);
             const next = document.getElementById(nextId);
             
-            // Immediate disable clicks on old screen
             current.style.pointerEvents = 'none';
             current.style.opacity = '0';
             
@@ -574,7 +537,6 @@
                 current.classList.remove('active');
                 next.classList.add('active');
                 currentScreen = nextId;
-                // Enable clicks on new screen
                 setTimeout(() => {
                     next.style.opacity = '1';
                     next.style.pointerEvents = 'auto';
@@ -593,9 +555,6 @@
         setInterval(updateTime, 1000);
         updateTime();
 
-        // --- SEQUENCE ---
-        
-        // 1. REMOTE (Auto)
         async function startSequence() {
             const bar = document.getElementById('remote-bar');
             const text = document.getElementById('remote-text');
@@ -612,7 +571,6 @@
             runBios();
         }
 
-        // 2. BIOS (Auto)
         async function runBios() {
             const lines = [
                 "SCiPnet BIOS v5.4.1 (Build 9924)",
@@ -644,17 +602,15 @@
                 div.className = 'bios-line';
                 div.innerText = `> ${line}`;
                 container.appendChild(div);
-                await wait(100 + Math.random()*300); // Random typing speed
+                await wait(100 + Math.random()*300); 
             }
             await wait(1500);
             switchScreen('login-screen');
             runLoginType();
         }
 
-        // 3. LOGIN (Auto Type -> User Click)
         async function runLoginType() {
             await wait(1000);
-            // Randomized, realistic ID instead of name
             await type('login-user', '8944-DX-ADMIN'); 
             await wait(500);
             await type('login-pass', '**********');
@@ -669,9 +625,8 @@
             }
         }
 
-        // User Interaction 1
         function authorizeLogin() {
-            console.log("Login Clicked"); // Debug
+            console.log("Login Clicked"); 
             const btn = document.getElementById('login-btn');
             btn.innerText = "AUTHENTICATING...";
             btn.style.background = "#fff";
@@ -680,23 +635,19 @@
             }, 1000);
         }
 
-        // User Interaction 2
         function enterAdmin() {
             switchScreen('database-screen');
             populateDB();
         }
 
-        // 4. DATABASE (Auto Populate -> User Click)
         async function populateDB() {
             const list = document.getElementById('file-list');
             list.innerHTML = '';
             
-            // Dummy entries generator
             const depts = ['SEC', 'LOG', 'RES', 'MTF', 'MED', 'ENG'];
             const statuses = ['ERR', 'LCK', 'DEL', 'CORRUPT'];
             const files = [];
 
-            // Generate 30 random files
             for(let i=0; i<30; i++) {
                 const id = `45-${depts[Math.floor(Math.random()*depts.length)]}-${Math.floor(Math.random()*900)+100}`;
                 const status = statuses[Math.floor(Math.random()*statuses.length)];
@@ -709,7 +660,6 @@
                 });
             }
 
-            // Insert Target File at random index or fixed
             const targetFile = {
                 id: '45-ADMIN-KC', 
                 name: 'CHARLES, KAEL - PERSONNEL FILE', 
@@ -718,7 +668,6 @@
                 active: true
             };
             
-            // Place target roughly in the middle so user has to scroll
             files.splice(12, 0, targetFile);
             
             await wait(500);
@@ -741,7 +690,6 @@
             switchScreen('file-screen');
         }
 
-        // 5. TABS (User Click)
         window.switchTab = function(tabId) {
             document.querySelectorAll('.tab-content').forEach(e => e.classList.remove('active'));
             document.querySelectorAll('.tab-btn').forEach(e => e.classList.remove('active'));
