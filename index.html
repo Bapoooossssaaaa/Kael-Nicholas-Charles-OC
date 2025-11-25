@@ -8,15 +8,23 @@
     <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap" rel="stylesheet">
     
     <style>
+      
         :root {
-            --bg-image: url('https://github.com/Bapoooossssaaaa/WLOC/blob/main/Untitled%20design%20(5).gif?raw=true');
-            --login-overlay: url('https://github.com/Bapoooossssaaaa/WLOC/blob/main/Untitled%20design%20(27).png?raw=true');
-            --login-bar: #1a1a1a;
-            --admin-solid: #1a3c25;
+            
+            --sys-a-bg: url('https://github.com/Bapoooossssaaaa/WLOC/blob/main/Untitled%20design%20(5).gif?raw=true');
+            --sys-a-overlay: url('https://github.com/Bapoooossssaaaa/WLOC/blob/main/Untitled%20design%20(27).png?raw=true');
+            --sys-a-color: #e0e0e0;
+            --sys-a-accent: #1a3c25;
             --medical-blue: #00aaff;
             --glass-panel: rgba(10, 15, 10, 0.9);
             --glass-light: rgba(240, 245, 240, 0.95);
-            --text-main: #e0e0e0;
+            
+            
+            --sys-b-bg-main: url('https://github.com/Bapoooossssaaaa/Kael-Nicholas-Charles-OC/blob/main/Untitled%20design.gif?raw=true');
+            --sys-b-bg-login: url('https://github.com/Bapoooossssaaaa/Kael-Nicholas-Charles-OC/blob/main/Untitled%20design%20(1).gif?raw=true');
+            --sys-b-bg-panel: url('https://github.com/Bapoooossssaaaa/Kael-Nicholas-Charles-OC/blob/main/Untitled%20design%20(22).png?raw=true');
+            --sys-b-color: #fff;
+            
             --font-tech: 'Share Tech Mono', monospace;
         }
 
@@ -24,135 +32,102 @@
 
         ::-webkit-scrollbar { width: 8px; }
         ::-webkit-scrollbar-track { background: #111; }
-        ::-webkit-scrollbar-thumb { background: var(--admin-solid); }
+        ::-webkit-scrollbar-thumb { background: var(--sys-a-accent); }
         ::-webkit-scrollbar-thumb:hover { background: #2d5a3c; }
 
         body {
             background-color: #000;
-            background-image: var(--bg-image);
-            background-size: cover;
-            background-position: center;
-            background-attachment: fixed;
             font-family: var(--font-tech);
-            height: 100vh;
-            width: 100vw;
+            height: 100vh; width: 100vw;
             overflow: hidden;
-            color: var(--text-main);
+            color: var(--sys-a-color);
         }
 
+      
+        #system-a { 
+            display: block; 
+            background-image: var(--sys-a-bg); 
+            background-size: cover; 
+            background-attachment: fixed;
+            width: 100%; height: 100%; position: absolute; top: 0; left: 0;
+        }
+        #system-b { 
+            display: none; 
+            background-size: cover; 
+            background-position: center;
+            width: 100%; height: 100%; position: absolute; top: 0; left: 0;
+        }
+
+        
         .scanlines {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
             background-size: 100% 2px, 3px 100%;
             z-index: 9999; pointer-events: none;
-            animation: flicker 0.15s infinite;
-            opacity: 0.6;
+            animation: flicker 0.15s infinite; opacity: 0.6;
         }
         @keyframes flicker { 0% { opacity: 0.6; } 50% { opacity: 0.65; } 100% { opacity: 0.6; } }
 
         .screen {
             position: absolute; top: 0; left: 0; width: 100%; height: 100%;
             display: none; flex-direction: column;
-            z-index: 0; opacity: 0;
-            transition: opacity 0.5s ease-in-out;
+            z-index: 0; opacity: 0; transition: opacity 0.5s ease-in-out;
             pointer-events: none; 
         }
-        .screen.active { 
-            display: flex; 
-            opacity: 1; 
-            z-index: 100;
-            pointer-events: auto; 
-        }
+        .screen.active { display: flex; opacity: 1; z-index: 100; pointer-events: auto; }
         
+        
+        .jump-cut { transition: none !important; opacity: 1 !important; display: flex !important; pointer-events: auto !important; z-index: 200 !important; }
+
         .full-center {
             display: flex; justify-content: center; align-items: center;
             height: 100%; width: 100%; flex-direction: column;
         }
 
-        .top-bar {
+        
+        
+        .a-top-bar {
             position: absolute; top: 0; left: 0; width: 100%; height: 50px;
             display: flex; align-items: center; justify-content: space-between;
-            padding: 0 2rem; color: white;
-            box-shadow: 0 2px 15px rgba(0,0,0,0.8); z-index: 500;
+            padding: 0 2rem; color: white; box-shadow: 0 2px 15px rgba(0,0,0,0.8); z-index: 500;
             font-size: 1.1rem; letter-spacing: 1px;
         }
-        .login-top { background-color: var(--login-bar); border-bottom: 1px solid #444; }
-        .site-top { background-color: var(--admin-solid); border-bottom: 2px solid white; }
+        .a-login-top { background-color: #1a1a1a; border-bottom: 1px solid #444; }
+        .a-site-top { background-color: var(--sys-a-accent); border-bottom: 2px solid white; }
 
-        .time-display { font-size: 0.9rem; opacity: 0.8; }
-        
-        .logo-white {
-            height: 35px; 
-            margin-right: 15px;
-            filter: invert(100%) brightness(200%);
-        }
         .bar-left { display: flex; align-items: center; }
+        .time-display { font-family: var(--font-tech); font-size: 0.9rem; opacity: 0.8; }
+        .logo-white { height: 35px; margin-right: 15px; filter: invert(100%) brightness(200%); }
 
-        #remote-screen { background: #000; color: #fff; z-index: 1000; }
+        
+        #a-remote-screen { background: #000; color: #fff; z-index: 1000; }
         .connection-icon { font-size: 4rem; margin-bottom: 2rem; color: #fff; }
         .progress-container { width: 300px; height: 4px; background: #333; margin: 20px 0; }
         .progress-bar { width: 0%; height: 100%; background: #fff; transition: width 0.2s; }
-        #remote-screen h2 { color: #fff; }
 
-        #bios-screen {
-            background-color: #050505; color: #fff;
-            padding: 0; font-size: 1rem; z-index: 900;
-            display: flex; align-items: center; justify-content: center;
-        }
-        #bios-content { 
-            width: 800px; 
-            height: 600px; 
-            max-width: 90%; 
-            text-align: left; 
-            display: flex; 
-            flex-direction: column; 
-            justify-content: flex-start; 
-        }
-        .bios-line { 
-            margin-bottom: 2px; 
-            opacity: 0; 
-            animation: fadeIn 0.05s forwards; 
-            text-shadow: 0 0 5px rgba(255,255,255,0.5); 
-            white-space: pre-wrap; 
-        }
+        #a-bios-screen { background: #000; color: #fff; display: flex; align-items: center; justify-content: center; }
+        #a-bios-content { width: 800px; height: 600px; max-width: 90%; text-align: left; display: flex; flex-direction: column; }
+        .bios-line { margin-bottom: 2px; opacity: 0; animation: fadeIn 0.05s forwards; text-shadow: 0 0 5px rgba(255,255,255,0.5); white-space: pre-wrap; }
         @keyframes fadeIn { to { opacity: 1; } }
 
-        #login-screen { z-index: 800; }
-        .login-box {
-            position: relative;
-            width: 500px; padding: 3rem;
-            border: 1px solid #555;
-            color: #eee; text-align: center;
-            background-color: rgba(10, 10, 10, 0.9);
-            overflow: hidden;
-            box-shadow: 0 0 50px rgba(0,0,0,0.8);
-            z-index: 801; 
+        #a-login-screen { z-index: 800; }
+        .a-login-box {
+            position: relative; width: 500px; padding: 3rem; border: 1px solid #555;
+            color: #eee; text-align: center; background-color: rgba(10, 10, 10, 0.9);
+            overflow: hidden; box-shadow: 0 0 50px rgba(0,0,0,0.8); z-index: 801; 
         }
-        .login-box::before {
+        .a-login-box::before {
             content: ""; position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-            background-image: var(--login-overlay);
-            background-size: cover; background-position: center;
-            opacity: 0.08; 
-            z-index: 0; pointer-events: none;
+            background-image: var(--sys-a-overlay); background-size: cover; opacity: 0.08; z-index: 0; pointer-events: none;
         }
-        .login-content { position: relative; z-index: 10; } 
+        .a-login-content { position: relative; z-index: 10; } 
 
-        .input-field {
-            width: 100%; padding: 12px; border: 1px solid #666; background: rgba(0,0,0,0.5);
-            color: #fff; margin-bottom: 1rem; font-family: var(--font-tech); font-size: 1.1rem;
-        }
-        .btn {
-            background: #ccc; color: #111; border: none; padding: 12px 20px;
-            width: 100%; font-weight: bold; text-transform: uppercase;
-            font-family: var(--font-tech); font-size: 1.2rem; letter-spacing: 1px;
-            transition: 0.3s; margin-top: 10px;
-            pointer-events: auto; cursor: pointer;
-            position: relative; z-index: 20;
-        }
-        .btn:hover { background: #fff; box-shadow: 0 0 15px rgba(255,255,255,0.5); }
-        .btn:active { transform: scale(0.98); }
+        .input-field { width: 100%; padding: 12px; border: 1px solid #666; background: rgba(0,0,0,0.5); color: #fff; margin-bottom: 1rem; font-family: var(--font-tech); font-size: 1.1rem; }
+        .btn { background: #ccc; color: #111; border: none; padding: 12px 20px; width: 100%; font-weight: bold; cursor: pointer; position: relative; z-index: 20; font-family: var(--font-tech); font-size: 1.1rem; }
+        .btn:hover { background: #fff; }
 
-        #network-screen { z-index: 700; background: rgba(0,0,0,0.85); backdrop-filter: blur(8px); }
+    
+        #a-net-screen { z-index: 700; background: rgba(0,0,0,0.85); backdrop-filter: blur(8px); }
         .network-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; z-index: 2; }
         .net-card {
             background: rgba(20, 20, 20, 0.6); padding: 2rem; width: 300px; height: 320px;
@@ -165,7 +140,8 @@
         }
         .net-icon { height: 80px; margin-bottom: 1.5rem; }
 
-        #database-screen { z-index: 600; padding-top: 50px; }
+      
+        #a-db-screen { z-index: 600; padding-top: 50px; }
         .db-container {
             width: 90%; height: 85%;
             background: var(--glass-panel); backdrop-filter: blur(15px);
@@ -173,7 +149,7 @@
             border: 1px solid #333; box-shadow: 0 0 40px rgba(0,0,0,0.8);
         }
         .file-row {
-            display: flex; padding: 15px; border-bottom: 1px solid #333;
+            display: flex; padding: 10px 15px; border-bottom: 1px solid #333;
             align-items: center; font-size: 1.1rem; color: #888; cursor: not-allowed; opacity: 0.7;
         }
         .file-row.selectable { cursor: pointer; transition: 0.2s; opacity: 1; }
@@ -186,115 +162,263 @@
             background: rgba(0, 255, 0, 0.15); 
             color: #fff; padding-left: 20px; 
         }
+        .file-tag {
+            display: inline-block;
+            width: 90px;
+            text-align: center;
+            padding: 2px 5px;
+            border: 1px solid currentColor;
+            margin-right: 15px;
+            font-weight: bold;
+            font-size: 0.9rem;
+        }
 
-        #file-screen { z-index: 500; padding-top: 50px; }
-        .file-interface {
-            width: 100%; height: calc(100vh - 50px);
-            display: flex; background: var(--glass-light);
-            backdrop-filter: blur(20px); color: #111;
-        }
-        
-        .file-sidebar {
-            width: 320px; background: rgba(220, 220, 220, 0.9);
-            border-right: 1px solid #999; padding: 2rem;
-            display: flex; flex-direction: column; align-items: center; text-align: center;
-        }
-        .profile-pic {
-            width: 200px; height: 260px; background: #888; margin-bottom: 1.5rem;
-            border: 4px solid var(--admin-solid); object-fit: cover;
-        }
-        
+       
+        #a-file-screen { z-index: 500; padding-top: 50px; }
+        .file-interface { width: 100%; height: calc(100vh - 50px); display: flex; background: var(--glass-light); color: #111; backdrop-filter: blur(20px); }
+        .file-sidebar { width: 320px; background: rgba(220, 220, 220, 0.9); border-right: 1px solid #999; padding: 2rem; display: flex; flex-direction: column; align-items: center; text-align: center; }
+        .profile-pic { width: 200px; height: 260px; background: #888; margin-bottom: 1.5rem; border: 4px solid var(--sys-a-accent); object-fit: cover; }
         .file-main { flex: 1; display: flex; flex-direction: column; position: relative; overflow: hidden; }
-        .logo-bg-watermark {
-            position: absolute; 
-            top: 50%; left: 50%; transform: translate(-50%, -50%);
-            opacity: 0.08; width: 600px; pointer-events: none; z-index: 0;
-        }
-
-        .file-top-nav {
-            background: rgba(0,0,0,0.1); padding: 0 2rem; display: flex; align-items: flex-end; height: 55px;
-            border-bottom: 1px solid #999; z-index: 10;
-        }
-        .tab-btn {
-            padding: 15px 25px; background: rgba(0,0,0,0.1); margin-right: 4px;
-            cursor: pointer; font-weight: bold; color: #444; transition: 0.2s; font-size: 1rem;
-        }
-        .tab-btn:hover { background: rgba(255,255,255,0.5); }
-        .tab-btn.active {
-            background: white; color: var(--admin-solid); border-top: 4px solid var(--admin-solid);
-        }
         
-        .tab-content {
-            padding: 3rem; overflow-y: auto; flex: 1; line-height: 1.6; font-size: 1.1rem;
-            display: none; z-index: 10; position: relative;
+        .secret-link { 
+            cursor: pointer; color: var(--sys-a-accent); text-decoration: underline; 
+            position: relative; transition: 0.3s;
         }
+        .secret-link:hover { color: red; text-shadow: 0 0 5px red; }
+        .secret-link::after {
+            content: '[CONNECT]'; position: absolute; top: -20px; left: 0; background: black; color: red; font-size: 0.7rem; padding: 2px; display: none;
+        }
+        .secret-link:hover::after { display: block; }
+
+        .file-top-nav { background: rgba(0,0,0,0.1); padding: 0 2rem; display: flex; align-items: flex-end; height: 55px; border-bottom: 1px solid #999; z-index: 10; }
+        .tab-btn { padding: 15px 30px; background: rgba(0,0,0,0.1); margin-right: 4px; cursor: pointer; font-weight: bold; color: #444; }
+        .tab-btn.active { background: white; color: var(--sys-a-accent); border-top: 4px solid var(--sys-a-accent); }
+        .tab-content { padding: 3rem; overflow-y: auto; flex: 1; line-height: 1.6; font-size: 1.1rem; display: none; }
         .tab-content.active { display: block; }
-
-        h1 { font-size: 2.2rem; color: var(--admin-solid); margin-bottom: 0.5rem; }
-        h2 { font-size: 1.5rem; color: var(--admin-solid); margin-top: 2rem; border-bottom: 2px solid #ccc; }
-        
-        p { margin-bottom: 1.5rem; text-align: justify; }
 
         .hl { color: #b30000; font-weight: bold; } 
         .hl-org { color: #00008b; font-weight: bold; } 
         .hl-date { color: #333; font-weight: bold; border-bottom: 1px dotted #555; }
+        .quote-box { background: rgba(0,0,0,0.05); border-left: 4px solid var(--sys-a-accent); padding: 15px; font-style: italic; margin: 20px 0; }
         
-        .quote-box {
-            background: rgba(0,0,0,0.05);
-            border-left: 4px solid var(--admin-solid);
-            padding: 15px;
-            font-style: italic;
-            margin: 20px 0;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      
+        .ability-tag { 
+            display: inline-block; background: var(--sys-a-accent); color: white; 
+            padding: 5px 12px; margin: 5px; border: 1px solid #000; font-size: 0.9rem;
+            cursor: pointer; transition: 0.2s; 
+            position: relative; z-index: 20;
+        }
+        .ability-tag:hover {
+            background: #fff; color: var(--sys-a-accent); transform: scale(1.05);
+            box-shadow: 0 0 10px rgba(0,0,0,0.3);
         }
 
-        .ability-tag {
-            display: inline-block;
-            background: var(--admin-solid);
-            color: white;
-            padding: 5px 12px;
-            margin: 5px;
-            font-size: 0.9rem;
-            border-radius: 2px;
-            border: 1px solid #000;
+     
+        #ability-modal {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.7); backdrop-filter: blur(5px);
+            z-index: 9999; display: none;
+            align-items: center; justify-content: center;
         }
+        .modal-content {
+            width: 600px; max-width: 90%; background: #f0f0f0; border: 4px solid var(--sys-a-accent);
+            padding: 2rem; color: #111; position: relative;
+            box-shadow: 0 0 50px rgba(0,0,0,0.8);
+        }
+        .modal-close {
+            position: absolute; top: 10px; right: 15px; font-size: 1.5rem; 
+            color: var(--sys-a-accent); cursor: pointer;
+        }
+        .modal-header {
+            font-size: 1.5rem; font-weight: bold; border-bottom: 2px solid #999;
+            margin-bottom: 1rem; padding-bottom: 0.5rem; color: var(--sys-a-accent);
+        }
+        .modal-body { font-size: 1rem; line-height: 1.5; white-space: pre-line; }
 
-        .med-header {
-            border: 2px solid var(--medical-blue);
-            background: rgba(0, 170, 255, 0.1);
-            padding: 15px;
-            text-align: center;
-            margin-bottom: 20px;
-            color: var(--medical-blue);
-        }
-        .med-grid {
-            position: relative; 
-            display: grid;
-            grid-template-columns: 150px 1fr;
-            gap: 10px;
-            border: 1px solid #ccc;
-            padding: 20px;
-            background: #f9fcfd;
-            font-family: 'Courier New', Courier, monospace;
-            font-size: 0.95rem;
-        }
+        .med-header { border: 2px solid var(--medical-blue); background: rgba(0, 170, 255, 0.1); padding: 15px; text-align: center; margin-bottom: 20px; color: var(--medical-blue); }
+        .med-grid { position: relative; display: grid; grid-template-columns: 150px 1fr; gap: 10px; border: 1px solid #ccc; padding: 20px; background: #f9fcfd; font-family: 'Courier New', monospace; font-size: 0.9rem; }
         .med-label { font-weight: bold; color: var(--medical-blue); text-align: right; padding-right: 15px; }
         .med-val { color: #333; }
+        .med-stamp { position: absolute; top: 30px; right: 40px; border: 4px solid green; color: green; padding: 10px 20px; transform: rotate(-10deg); font-weight: bold; font-size: 1.5rem; opacity: 0.8; pointer-events: none; text-transform: uppercase; }
+
         
-        .med-stamp {
-            position: absolute;
-            top: 30px;
-            right: 40px;
-            border: 4px solid green; 
-            color: green; 
-            padding: 10px 20px; 
-            transform: rotate(-10deg); 
-            font-weight: bold; 
-            font-size: 1.5rem;
-            opacity: 0.8;
-            pointer-events: none;
-            text-transform: uppercase;
+        
+     
+        .b-line-left, .b-line-right {
+            position: absolute; top: 0; height: 15px;
+            background: linear-gradient(180deg, #222 0%, #000 100%);
+            border-bottom: 2px solid #fff; z-index: 2002;
         }
+        .b-line-left { left: 0; width: calc(50% - 200px);  }
+        .b-line-right { right: 0; width: calc(50% - 200px); }
+
+    
+        .b-trapezoid {
+            position: absolute; top: 0; 
+            left: 50%; transform: translateX(-50%);
+            width: 400px; height: 110px;
+            background: linear-gradient(180deg, #222 0%, #000 100%);
+            border: 2px solid #fff; 
+            clip-path: polygon(0 0, 100% 0, 85% 100%, 15% 100%);
+            display: flex; 
+            flex-direction: column; 
+            justify-content: center; align-items: center;
+            z-index: 2005;
+            box-shadow: 0 0 20px rgba(255,255,255,0.2);
+        }
+        .b-trap-img { 
+            height: 150px; 
+            margin-top: 5px; 
+            object-fit: contain;
+        }
+
+        #b-start-screen { background: #000; z-index: 2000; display: flex; align-items: center; justify-content: center; flex-direction: column;}
+        .b-title { font-size: 3rem; letter-spacing: 5px; color: #fff; text-shadow: 0 0 15px #fff; margin-bottom: 2rem; }
+        .b-connect-btn { background: transparent; border: 2px solid #fff; color: #fff; padding: 15px 40px; font-family: var(--font-tech); font-size: 1.5rem; cursor: pointer; transition: 0.2s; }
+        .b-connect-btn:hover { background: #fff; color: #000; box-shadow: 0 0 30px #fff; }
+
+        #b-uplink-screen { background: #000; z-index: 1900; color: #fff; display: flex; align-items: center; justify-content: center; flex-direction: column; }
+        #b-bios-screen { background: #000; z-index: 1800; color: #fff; display: flex; align-items: center; justify-content: center; }
+        
+        #b-login-screen { background-image: var(--sys-b-bg-login); background-size: cover; z-index: 1700; display: flex; align-items: center; justify-content: center; }
+        .b-login-box { 
+            background: rgba(0,0,0,0.8); padding: 4rem; border: 1px solid #fff; text-align: center; width: 500px; backdrop-filter: blur(10px); 
+            transform: scale(1.3);
+        }
+
+        #b-main-screen { background-image: var(--sys-b-bg-main); background-size: cover; z-index: 1600; display: flex; flex-direction: row; }
+        
+        .b-sidebar {
+            width: 350px; height: 100%; background: rgba(0,0,0,0.6); backdrop-filter: blur(10px);
+            border-left: 2px solid #fff; display: flex; flex-direction: column; padding: 10px;
+            position: absolute; right: 0; top: 0;
+            background-image: var(--sys-b-bg-panel);
+            padding-top: 130px; 
+        }
+        
+        .b-widget {
+            width: 100%; margin-bottom: 15px; border: 2px solid #fff; padding: 10px;
+            display: flex; flex-direction: column; align-items: center;
+            background: rgba(0,0,0,0.5);
+            box-shadow: 0 0 10px rgba(255,255,255,0.1);
+        }
+        .b-widget h4 { width: 100%; border-bottom: 1px solid #fff; margin-bottom: 10px; color: #fff; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 2px; }
+        .b-widget img { 
+            max-width: 100%; height: auto; max-height: 200px; object-fit: contain;
+            opacity: 0.9; display: block; border: 1px solid #fff;
+        }
+        .b-text-status {
+            font-family: monospace; color: #fff; width: 100%; text-align: left; font-size: 0.9rem; line-height: 1.4;
+        }
+        
+      
+        .b-clock {
+            margin-top: 10px; border: 2px solid #fff; padding: 5px 15px;
+            font-family: var(--font-tech); font-size: 1.5rem; color: #fff;
+            background: rgba(0,0,0,0.5); text-align: center; width: 100%;
+            box-shadow: 0 0 10px rgba(255,255,255,0.1);
+        }
+        
+        .b-center { flex: 1; display: flex; align-items: center; justify-content: center; margin-right: 350px; position: relative;}
+        
+      
+        #b-console-wrapper {
+            width: 90%; height: 80%; background: rgba(0,0,0,0.85);
+            border: 2px solid #fff; padding: 20px;
+            display: flex; flex-direction: column;
+            box-shadow: 0 0 30px rgba(0,0,0,0.8);
+            z-index: 10;
+        }
+        #b-console-output {
+            flex: 1; overflow-y: auto; margin-bottom: 10px;
+            font-family: monospace; color: #fff; text-shadow: 0 0 2px #fff;
+            line-height: 1.4; text-align: left;
+        }
+        .cmd-line { margin-bottom: 5px; }
+        .cmd-response { color: #ccc; margin-bottom: 10px; }
+        
+      
+        #b-keypad-game {
+            position: absolute; top: 50%; left: 50%; 
+            transform: translate(-50%, -50%) scale(1.4);  
+            width: 300px; background: rgba(0,0,0,0.95);
+            border: 4px solid #fff; padding: 20px;
+            display: none; flex-direction: column; align-items: center;
+            z-index: 500; box-shadow: 0 0 50px #fff;
+        }
+        .keypad-grid {
+            display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-top: 20px;
+        }
+        .keypad-btn {
+            width: 60px; height: 60px; border: 2px solid #555;
+            background: #111; color: #fff; font-family: var(--font-tech);
+            font-size: 1.5rem; cursor: pointer; transition: 0.1s;
+            display: flex; justify-content: center; align-items: center;
+        }
+    
+        .keypad-btn.blink-hint {
+            background: #0f0; color: #000; border-color: #0f0;
+            box-shadow: 0 0 15px #0f0;
+        }
+        .keypad-status { font-size: 1.2rem; color: #fff; font-family: var(--font-tech); margin-bottom: 10px; }
+
+  
+        #b-secret-file {
+            position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+            width: 80%; height: 80%; background: #000;
+            border: 2px solid #fff; color: #fff;
+            font-family: monospace; display: none; z-index: 600;
+            flex-direction: column;
+        }
+        .sf-tabs { 
+            display: flex; border-bottom: 2px solid #fff; 
+            background-image: url('https://github.com/Bapoooossssaaaa/Kael-Nicholas-Charles-OC/blob/main/TABBackground.png?raw=true');
+            background-size: cover; background-position: center;
+        }
+        .sf-tab-btn { 
+            flex: 1; padding: 15px; text-align: center; cursor: pointer; 
+            font-weight: bold; border-right: 1px solid #333; background: rgba(0,0,0,0.5); color: #888;
+        }
+        .sf-tab-btn.active { background: rgba(255,255,255,0.2); color: #fff; }
+        
+        .sf-content { 
+            flex: 1; padding: 30px; overflow-y: auto; text-align: left; position: relative;
+            background: #000;
+        }
+        
+    
+        .sf-intro {
+            font-weight: bold; color: #fff; text-shadow: 0 0 2px rgba(255,255,255,0.8), 0 0 5px rgba(255,255,255,0.5);
+            font-size: 1.1rem; margin-bottom: 25px; line-height: 1.6; 
+            background: rgba(0,0,0,0.4); padding: 15px; border-left: 4px solid #fff;
+        }
+
+        .sf-entry {
+            display: flex; align-items: flex-start; margin-bottom: 25px;
+            background: rgba(0,0,0,0.6); padding: 15px; border-left: 4px solid #fff;
+        }
+        .sf-icon { font-size: 2rem; margin-right: 20px; color: #ccc; width: 40px; text-align: center; }
+        .sf-text { font-size: 1rem; line-height: 1.5; color: #ddd; }
+        
+    
+        .sf-entry.border-green { border-left-color: lime; }
+        .sf-entry.border-orange { border-left-color: orange; }
+        .sf-entry.border-blue { border-left-color: #00aaff; }
+
+    
+        #waiver-preview { width: 40%; cursor: pointer; border: 2px solid #fff; transition: 0.2s; box-shadow: 0 0 15px rgba(0,0,0,0.5); }
+        #waiver-preview:hover { transform: scale(1.05); border-color: lime; }
+        .sf-zoom-btn { margin-top: 10px; padding: 5px 15px; background: #fff; color: #000; border: none; font-weight: bold; cursor: pointer; }
+
+   
+        #zoom-modal {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.8); backdrop-filter: blur(10px);
+            z-index: 9000; display: none; align-items: center; justify-content: center;
+        }
+        #zoom-img { max-height: 90%; max-width: 90%; border: 2px solid #fff; box-shadow: 0 0 30px #000; }
+        .zoom-close { position: absolute; top: 20px; right: 30px; font-size: 3rem; color: #fff; cursor: pointer; transition: 0.2s; }
+        .zoom-close:hover { color: red; transform: scale(1.1); }
 
     </style>
 </head>
@@ -302,229 +426,607 @@
 
     <div class="scanlines"></div>
 
-    <div id="remote-screen" class="screen active full-center">
-        <i class="fas fa-terminal connection-icon" style="animation: pulse 2s infinite;"></i>
-        <h2 style="font-weight:normal; letter-spacing:2px; color:#fff;">REMOTE UPLINK INITIATED</h2>
-        <div class="progress-container"><div class="progress-bar" id="remote-bar"></div></div>
-        <div id="remote-text" style="color:white;">Handshake...</div>
-    </div>
-
-    <div id="bios-screen" class="screen">
-        <div id="bios-content"></div>
-    </div>
-
-    <div id="login-screen" class="screen full-center">
-        <div class="top-bar login-top">
-            <div class="bar-left">
-                <img src="https://github.com/Bapoooossssaaaa/WLOC/blob/main/Logo_of_the_SCP_Foundation.png?raw=true" class="logo-white">
-                SCiPnet SECURE GATEWAY
-            </div>
-            <div class="time-display" id="time-1">00:00:00</div>
+  
+    <div id="ability-modal">
+        <div class="modal-content">
+            <span class="modal-close" onclick="closeModal()">&times;</span>
+            <div class="modal-header" id="modal-title">TITLE</div>
+            <div class="modal-body" id="modal-desc">Description here...</div>
         </div>
+    </div>
+
+    
+    <div id="zoom-modal">
+        <span class="zoom-close" onclick="closeZoom()">&times;</span>
+        <img id="zoom-img" src="">
+    </div>
+
+    
+    <div id="system-a">
+
+       
+        <div id="a-remote-screen" class="screen active full-center">
+            <i class="fas fa-terminal connection-icon" style="animation: pulse 2s infinite;"></i>
+            <h2 style="font-weight:normal; letter-spacing:2px; color:#fff;">REMOTE UPLINK INITIATED</h2>
+            <div class="progress-container"><div id="a-remote-bar" class="progress-bar"></div></div>
+            <div id="a-remote-text" style="color:white;">Handshake...</div>
+        </div>
+
         
-        <div class="login-box">
-            <div class="login-content">
-                <img src="https://github.com/Bapoooossssaaaa/WLOC/blob/main/RAISA.webp?raw=true" style="height: 85px; margin-top:10px; margin-bottom: 20px;">
-                <h2 style="margin-bottom: 5px; letter-spacing: 2px; color: #fff;">RAISA AUTHENTICATION</h2>
-                <p style="font-size: 0.8rem; color: #aaa; margin-bottom: 2rem;">SECURE TERMINAL T-45-ADMIN-01</p>
-                
-                <div style="text-align: left;">
-                    <label>PERSONNEL ID</label>
-                    <input type="text" id="login-user" class="input-field" readonly>
-                    <label>PASSPHRASE</label>
-                    <input type="password" id="login-pass" class="input-field" readonly>
-                </div>
-                
-                <button class="btn" id="login-btn" onclick="authorizeLogin()">AUTHORIZE</button>
-                <div id="login-status" style="margin-top:15px; height:20px; color: lime;"></div>
-            </div>
+        <div id="a-bios-screen" class="screen">
+            <div id="a-bios-content"></div>
         </div>
-    </div>
 
-    <div id="network-screen" class="screen full-center">
-        <div class="top-bar login-top">
-            <div class="bar-left">
-                <img src="https://github.com/Bapoooossssaaaa/WLOC/blob/main/Logo_of_the_SCP_Foundation.png?raw=true" class="logo-white">
-                NETWORK ROUTING
-            </div>
-            <div class="time-display" id="time-2">00:00:00</div>
-        </div>
-        <h2 style="margin-bottom: 2rem; background:#000; padding:5px 15px;">SELECT DESTINATION NODE</h2>
-        <div class="network-grid">
-            <div class="net-card" style="opacity:0.5; filter:grayscale(1);">
-                <img src="https://github.com/Bapoooossssaaaa/WLOC/blob/main/Intelligence_Agency.webp?raw=true" class="net-icon">
-                <h3>INTELLIGENCE</h3>
-                <small style="color:red;">[L5 CLEARANCE REQ]</small>
-            </div>
-            <div class="net-card active" onclick="enterAdmin()">
-                <img src="https://github.com/Bapoooossssaaaa/WLOC/blob/main/Admin_old.webp?raw=true" class="net-icon">
-                <h3>ADMINISTRATIVE</h3>
-                <small style="color:lime;">[ACCESS GRANTED]</small>
-            </div>
-            <div class="net-card" style="opacity:0.5; filter:grayscale(1);">
-                <img src="https://github.com/Bapoooossssaaaa/WLOC/blob/main/Logo_of_the_SCP_Foundation.png?raw=true" class="net-icon">
-                <h3>GENERAL ARCHIVE</h3>
-                <small style="color:orange;">[OFFLINE]</small>
-            </div>
-        </div>
-    </div>
-
-    <div id="database-screen" class="screen full-center">
-        <div class="top-bar site-top">
-            <div class="bar-left">
-                <img src="https://github.com/Bapoooossssaaaa/WLOC/blob/main/Admin_old.webp?raw=true" style="height:30px; margin-right:10px;">
-                SITE-45 // ADMIN DATABASE
-            </div>
-            <div class="time-display" id="time-3">00:00:00</div>
-        </div>
         
-        <div class="db-container">
-            <div style="padding:1.5rem; border-bottom:1px solid #444; display:flex; justify-content:space-between;">
-                <div>PERSONNEL FILES (LEVEL 4)</div>
-                <div id="db-status" style="color:lime;">CONNECTED</div>
+        <div id="a-login-screen" class="screen full-center">
+            <div class="a-top-bar a-login-top">
+                <div class="bar-left"><img src="https://github.com/Bapoooossssaaaa/WLOC/blob/main/Logo_of_the_SCP_Foundation.png?raw=true" class="logo-white"> SCiPnet SECURE GATEWAY</div>
+                <div class="time-display" id="time-1">00:00:00</div>
             </div>
-            <div style="flex:1; overflow-y:auto; padding:1rem;" id="file-list">
+            <div class="a-login-box">
+                <div class="a-login-content">
+                    <img src="https://github.com/Bapoooossssaaaa/WLOC/blob/main/RAISA.webp?raw=true" style="height: 85px; margin-bottom: 20px;">
+                    <h2 style="margin-bottom: 5px; color: #fff;">RAISA AUTHENTICATION</h2>
+                    <p style="font-size: 0.8rem; color: #aaa; margin-bottom: 2rem;">SECURE TERMINAL T-45-ADMIN-01</p>
+                    
+                    <div style="text-align: left;">
+                        <label>PERSONNEL ID</label>
+                        <input type="text" id="a-user" class="input-field" readonly>
+                        <label>PASSPHRASE</label>
+                        <input type="password" id="a-pass" class="input-field" readonly>
+                    </div>
+
+                    <button class="btn" id="a-btn" onclick="sysA_Auth()">AUTHORIZE</button>
+                    <div id="a-status" style="margin-top:10px; color:lime;"></div>
+                </div>
+            </div>
+        </div>
+
+      
+        <div id="a-net-screen" class="screen full-center">
+            <div class="a-top-bar a-login-top">
+                <div class="bar-left"><img src="https://github.com/Bapoooossssaaaa/WLOC/blob/main/Logo_of_the_SCP_Foundation.png?raw=true" class="logo-white"> NETWORK ROUTING</div>
+                <div class="time-display" id="time-2">00:00:00</div>
+            </div>
+            <h2 style="margin-bottom: 2rem; background:#000; padding:5px 15px;">SELECT DESTINATION NODE</h2>
+            <div class="network-grid">
+                <div class="net-card" style="opacity:0.5; filter:grayscale(1);">
+                    <img src="https://github.com/Bapoooossssaaaa/WLOC/blob/main/Intelligence_Agency.webp?raw=true" class="net-icon">
+                    <h3>INTELLIGENCE</h3>
+                    <small style="color:red;">[L5 CLEARANCE REQ]</small>
+                </div>
+                <div class="net-card active" onclick="sysA_EnterAdmin()">
+                    <img src="https://github.com/Bapoooossssaaaa/WLOC/blob/main/Admin_old.webp?raw=true" class="net-icon">
+                    <h3>ADMINISTRATIVE</h3>
+                    <small style="color:lime;">[ACCESS GRANTED]</small>
+                </div>
+                <div class="net-card" style="opacity:0.5; filter:grayscale(1);">
+                    <img src="https://github.com/Bapoooossssaaaa/WLOC/blob/main/Logo_of_the_SCP_Foundation.png?raw=true" class="net-icon">
+                    <h3>GENERAL ARCHIVE</h3>
+                    <small style="color:orange;">[OFFLINE]</small>
+                </div>
+            </div>
+        </div>
+
+     
+        <div id="a-db-screen" class="screen full-center">
+            <div class="a-top-bar a-site-top">
+                <div class="bar-left">
+                    <img src="https://github.com/Bapoooossssaaaa/WLOC/blob/main/Admin_old.webp?raw=true" style="height:30px; margin-right:10px;">
+                    SITE-45 // ADMIN DATABASE
+                </div>
+                <div class="time-display" id="time-3">00:00:00</div>
+            </div>
+            <div class="db-container">
+                <div style="padding:1.5rem; border-bottom:1px solid #444; display:flex; justify-content:space-between;">
+                    <div>PERSONNEL FILES (LEVEL 4)</div>
+                    <div id="db-status" style="color:lime;">CONNECTED</div>
+                </div>
+                <div style="flex:1; overflow-y:auto; padding:1rem;" id="a-file-list"></div>
+            </div>
+        </div>
+
+  
+        <div id="a-file-screen" class="screen">
+            <div class="a-top-bar a-site-top">
+                <div class="bar-left">
+                    <img src="https://github.com/Bapoooossssaaaa/WLOC/blob/main/Admin_old.webp?raw=true" style="height:30px; margin-right:10px;">
+                    PERSONNEL DOSSIER VIEW
+                </div>
+                <div class="time-display" id="time-4">00:00:00</div>
+            </div>
+
+            <div class="file-interface">
+                <div class="file-sidebar">
+                    <div class="profile-pic">
+                        <img src="https://github.com/Bapoooossssaaaa/WLOC/blob/main/Screenshot%202025-11-24%20010528.png?raw=true" style="width:100%; height:100%; object-fit:cover;">
+                    </div>
+                    <h2 style="margin:0; border:none;">KAEL CHARLES</h2>
+                    <div style="background:var(--sys-a-accent); color:white; padding:5px 15px; margin-top:10px; width:100%;">LEVEL 4 / HCZ</div>
+                    <div style="text-align:left; width:100%; margin-top:2rem; line-height:1.8;">
+                        <p style="margin-bottom:5px;"><strong>ID:</strong> <span class="secret-link" onclick="breachSystem()">15-8944-DX</span></p>
+                        <p style="margin-bottom:5px;"><strong>Role:</strong> Zone Manager</p>
+                        <p style="margin-bottom:5px;"><strong>Dept:</strong> Administrative</p>
+                        <p style="margin-bottom:5px;"><strong>Site:</strong> 45</p>
+                        <p style="margin-bottom:5px;"><strong>Status:</strong> <span style="color:green;">ACTIVE</span></p>
+                    </div>
+                </div>
+                <div class="file-main">
+                    <img src="https://github.com/Bapoooossssaaaa/WLOC/blob/main/Admin_old.webp?raw=true" style="position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); opacity:0.08; width:600px;">
+                    <div class="file-top-nav">
+                        <div class="tab-btn active" onclick="switchTab('tab-gen')">Overview</div>
+                        <div class="tab-btn" onclick="switchTab('tab-back')">Background</div>
+                        <div class="tab-btn" onclick="switchTab('tab-rec')">Recruitment</div>
+                        <div class="tab-btn" onclick="switchTab('tab-inc')">Medical</div>
+                        <div class="tab-btn" onclick="switchTab('tab-morph')">Morph</div>
+                    </div>
+                    
+                    <div id="tab-gen" class="tab-content active">
+                        <h1>KAEL “NICHOLAS” CHARLES</h1>
+                        <p><strong>Administrative Department, Installation Command, Site-45.</strong></p>
+                        <h2>Administrative Profile</h2>
+                        <p><strong>Zone Manager, High Containment Zone</strong></p>
+                        <p><strong>Clearance Level - 4/HCZ</strong></p>
+                        <h3 style="margin-top:2rem; color:#333;">Abilities</h3>
+                        <div style="margin-top:10px;">
+                            <span class="ability-tag" onclick="showAbility(1)"><i class="fas fa-lock"></i> Zone Lockdown</span>
+                            <span class="ability-tag" onclick="showAbility(2)"><i class="fas fa-truck-loading"></i> SCP Relocation</span>
+                            <span class="ability-tag" onclick="showAbility(3)"><i class="fas fa-user-shield"></i> Zone Authority</span>
+                            <span class="ability-tag" onclick="showAbility(4)"><i class="fas fa-sitemap"></i> Overall Management of HCZ</span>
+                        </div>
+                    </div>
+
+                    <div id="tab-back" class="tab-content">
+                        <h2>Short Birth Story</h2>
+                        <p><span class="hl">Kael Nicholas Charles</span> was born on <span class="hl-date">August 12, 1986</span>, in <span class="hl-date">Fairfax, VA</span>, to Thomas and Ellie Charles in an upper-class home. He had a brother named Reese who was in college at the time of his birth. His father was a retired <span class="hl-org">GS-14 Logistics Officer</span> for the <span class="hl-org">U.S. Department of Defense</span>, and his mother was a Public School Administrator in Fairfax County; both laid their years of knowledge and work onto him throughout his younger life. During his childhood, he didn’t see his brother too often, even after he finished college, nor did his parents talk about him much. Kael was saddened that he had never once gotten to see his older brother, which laid weight on him throughout his life. His father was mostly around and gave him knowledge of his days in the <span class="hl-org">Department of Defense</span>, especially regarding what he hated about his work.</p>
+                        <h2>Schooling/Work Experience</h2>
+                        <p>Kael attended <span class="hl-date">Woodson High School</span> and was keen on becoming a part of the school’s Student Government. He succeeded in this and even served as the President of Student Government during his junior year of high school. Academically, Kael was exceedingly easy to work with and did well in all of the classes he attended—some honors, some accelerated. After graduating high school in 2004, he was able to get a scholarship to <span class="hl-org">George Mason University</span>, earning a Master’s in Organization Development & Knowledge Management by 2010. He spent the next decade working for a private sector major defense contractor, <span class="hl-org">Booz Allen Hamilton</span>, in McLean, VA. He specialized in internal auditing and human resources for classified government projects. In 2016, after five years of strategic operations, Kael obtained his <span class="hl">Senior Certified Professional</span> credential from the <span class="hl-org">Society for Human Resource Management</span>. He also notably spearheaded a "Compliance Overhaul" for a 500-person logistics division, restructuring wage-and-hour auditing processes to eliminate legal liabilities before a federal review.</p>
+                    </div>
+
+                    <div id="tab-rec" class="tab-content">
+                        <h2>Foundation Discovery & Recruitment</h2>
+                        <p>By 2020, near the end of his contract, he caught the eye of an SCP Foundation Agent working deep cover in <span class="hl-org">Booz Allen Hamilton</span>: one <span class="hl">Alex V.</span>, disguised as a Junior IT Support Technician, but in reality, a member of the <span class="hl-org">Foundation’s Intelligence Network</span>. He wasn't there to recruit Kael initially; he was embedded in Booz Allen Hamilton to monitor a different executive suspected of selling classified logistics data to the <span class="hl">Chaos Insurgency</span>. That Senior Executive also fell under Kael's scrutiny during one of Kael’s audits. Kael was able to determine he was using a "Ghost Employee" scheme, creating fake employees on the payroll to funnel cash.</p>
+                        <p>Kael determined that if he flagged the account publicly, the executive would likely panic and purge the servers, destroying evidence and damaging the company. Instead, he opted to quietly quarantine the specific server cluster under the guise of a "Payroll System Update," and he physically walked down to the server room to authorize a hard lock on the drive. Afterward, he invited said Executive to a private meeting. He placed a single file on the desk: a pre-written Resignation Letter and a Non-Disclosure Agreement. He gave the Executive 10 minutes to sign both and leave the building, or else a special someone playing with company money would be reported to the FBI.</p>
+                        <p>Alex, watching via the network, realized Kael had inadvertently trapped the Foundation, too. When Kael locked the server to catch the thief, he locked the Agent out of his backdoor. It mattered little to the agent; the work was practically done for them. Kael was noted by the Foundation to have prioritized containment and silence instead of panicking or seeking glory. He effectively contained a breach and neutralized the threat without the public or even the wider company knowing. Two days after the Executive "retired for personal reasons," the Junior IT Tech, Alex, stopped by Kael’s office to "fix his email archive." While he worked on Kael’s terminal, Alex stopped for a moment, looked at Kael, and said:</p>
+                        <div class="quote-box">"Most people would have called the cops, Mr. Charles. But you knew that a police investigation would tank the stock price and lose the contract. You buried the body to save the house. We need people who know how to bury things."</div>
+                        <p>He then left a card that had a phone number on it, and three letters: <span class="hl">S.C.P.</span></p>
+                        <p>Kael made the smart move a day later and called the number. The man who answered spoke as if he had years of knowledge. <span class="hl">“Meet me at the Iwo Jima Memorial. North bench. Midnight. Come alone, or don't come at all.”</span></p>
+                        <p>Kael indeed arrived at midnight and saw a man in a suit and fedora sitting alone with a cigar in his mouth. The man laid a folder on the bench and left.</p>
+                        <p>The folder was substantially big, containing pages of questions about him and pages of files matching him and his identity, as if they had been watching his every move for years. At the bottom of the stack was a single, crisp document stamped with the seal of the <span class="hl-org">Administrative Department</span>. It listed no salary, only a Provisional Clearance Level and a directive: 'Report to <span class="hl-date">Dulles International Airport</span>, Private Hangar 4, at 0600 hours. Do not return home. Do not say goodbye. Your work begins now.' Before he closed the folder and got up, he saw a sticky note taped to the folder, and the words on it felt like the words he’d been wanting to hear all his years: ‘You want to see your brother after all these years, make the right choice.’</p>
+                        <p><span class="hl">Reese</span> had actually been working for the Foundation after college and seemed to have made quite a name for himself as the <span class="hl-org">Site Director for Site-15</span>. Kael was able to gain a spot serving under him and was able to converse with him plenty for the next four years of his employment in the Foundation’s Administrative Department. He didn’t do anything too important, just managing personnel files and paychecks, as well as dealing with concerns whenever necessary.</p>
+                    </div>
+
+                    <div id="tab-inc" class="tab-content">
+                        <div class="med-header">
+                            <h3>FOUNDATION MEDICAL SERVICES // SITE-15 INFIRMARY</h3>
+                            <small>PSYCHIATRIC EVALUATION DIVISION // CONFIDENTIAL</small>
+                        </div>
+                        <div class="med-grid">
+                            <div class="med-stamp">CLEARED FOR DUTY</div>
+                            <div class="med-label">REPORT TYPE:</div><div class="med-val"><h2>PATIENT EVALUATION REPORT</h2></div>
+                            <div class="med-label">INCIDENT ID:</div><div class="med-val">[REDACTED]</div>
+                            <div class="med-label">PATIENT:</div><div class="med-val">CHARLES, KAEL (15-8944-DX)</div>
+                            <div class="med-label">ATTENDING PHYSICIAN:</div><div class="med-val">Dr. Aristhrene</div>
+                            <div class="med-label">DATE:</div><div class="med-val">2025-08-12</div>
+                            <div class="med-label">LOCATION:</div><div class="med-val">Site-15 Medical Wing / Ward B</div>
+                            <div class="med-label">SYMPTOMS:</div><div class="med-val">Acute Insomnia, Paranoia, Psychosis, Subjective feeling of "Loss"</div>
+                            <div class="med-label">OBSERVATIONS:</div><div class="med-val">But then... he felt off one day, as if someone close to him was missing. The Site Director was also missing, and he felt those two things were somehow related, yet couldn’t put his finger on it. It kept him sleepless for a few nights, and he was transferred to the site’s medical wing after showing signs of psychosis and insomnia. He recovered after a little over a month. Afterward, he was recommended for a vacant position at Site-45 as a High Containment Zone Manager given the resilience he showed in his recovery. He was told this would be a very high-priority job and to take it with some level of seriousness. He did, and he has worked there to this day.</div>
+                            <div class="med-label">TREATMENT:</div><div class="med-val">Sedatives administered. 30 Days monitoring.</div>
+                            <div class="med-label">CONCLUSION:</div><div class="med-val">Recovered after a little over a month. Afterward, he was recommended for a vacant position at Site-45 as a High Containment Zone Manager given the resilience he showed in his recovery. He was told this would be a very high-priority job and to take it with some level of seriousness. He did, and he has worked there to this day.</div>
+                        </div>
+                    </div>
+
+                   
+                    <div id="tab-morph" class="tab-content">
+                        <div style="display:flex; gap:20px; margin-bottom:20px;">
+                            <div style="width: 200px; flex-shrink: 0;">
+                                <img src="https://github.com/Bapoooossssaaaa/Kael-Nicholas-Charles-OC/blob/main/Screenshot%202025-11-25%20011043.png?raw=true" style="width:100%; border:2px solid #fff; display:block;">
+                                <div style="text-align:center; font-size:0.8rem; margin-top:5px; color:#555;">MORPH PREVIEW</div>
+                            </div>
+                            <div style="flex-grow: 1; background:rgba(0,0,0,0.05); border:1px solid #999; padding:10px; font-family:monospace; font-size:0.85rem; color:#333; overflow-y:auto; max-height:300px; white-space: pre-wrap;">run
+permmorph WaltBo215 Remove &
+Team WaltBo215 ‘whitelisted personnel’
+permface me 0 &
+permhat WaltBo215 113764148666640, 136591222747465, 13725542349, 78272924549246, 122529465337911 &
+permshirt Waltbo215 3450062430 11942062856 &
+permntag WaltBo215 &lt;font face="Jura"&gt;&lt;font color="#FFA500"&gt;「CL - IV 」&lt;/font&gt; Kael “Nicholas” Charles &lt;/font&gt; &
+permrtag WaltBo215 &lt;font face="Jura"&gt; Administrative Department, Office of Installation Command &lt;br/&gt;&lt;font color="#5A1F1F"&gt;High Containment Zone Manager&lt;/font&gt;&lt;font color="#FFD700"&gt; [:] WLOC [:]&lt;/font&gt;&lt;/font&gt; &
+permcrtag Waltbo215 20 20 20 &
+permcntag Waltbo215 255 255 255 &
+startergear Waltbo215 clipboard,l2,coffee,smg46,m9,detain,tablet &
+startergear Waltbo215 medkit 10 black &
+permmaxhealth Waltbo215 120</div>
+                        </div>
+                        
+                        <h3 style="border-bottom:1px solid #999; padding-bottom:5px; margin-bottom:10px; color:#333;">GEAR PERMITS</h3>
+                        <div>
+                            <span class="ability-tag" onclick="showAbility(5)"><i class="fas fa-handcuffs"></i> Detain Tool Permit</span>
+                            <span class="ability-tag" onclick="showAbility(6)"><i class="fas fa-gun"></i> Weapon Permit</span>
+                            <span class="ability-tag" onclick="showAbility(7)"><i class="fas fa-tablet-alt"></i> Foundation Tablet</span>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 
-    <div id="file-screen" class="screen">
-        <div class="top-bar site-top">
-            <div class="bar-left">
-                <img src="https://github.com/Bapoooossssaaaa/WLOC/blob/main/Admin_old.webp?raw=true" style="height:30px; margin-right:10px;">
-                PERSONNEL DOSSIER VIEW
-            </div>
-            <div class="time-display" id="time-4">00:00:00</div>
+    <div id="system-b">
+        
+        <div id="b-start-screen" class="screen">
+            <div class="b-title">KAEL’S TERMINAL SITE-45</div>
+            <div style="margin-bottom:20px; color:#aaa; font-size:0.9rem;">( CONNECT BY CLICKING ID )</div>
+            <button class="b-connect-btn" onclick="sysB_Init()">[ CONNECT: 8944-DX-ADMIN ]</button>
         </div>
 
-        <div class="file-interface">
-            <div class="file-sidebar">
-                <div class="profile-pic">
-                    <img src="https://github.com/Bapoooossssaaaa/WLOC/blob/main/Screenshot%202025-11-24%20010528.png?raw=true" style="width:100%; height:100%; object-fit:cover;">
-                </div>
-                <h2 style="margin:0; border:none;">KAEL CHARLES</h2>
-                <div style="background:var(--admin-solid); color:white; padding:5px 15px; margin-top:10px; width:100%;">LEVEL 4 / HCZ</div>
-                
-                <div style="text-align:left; width:100%; margin-top:2rem; line-height:1.8;">
-                    <p style="margin-bottom:5px;"><strong>ID:</strong> 45-ADMIN-KC</p>
-                    <p style="margin-bottom:5px;"><strong>Role:</strong> Zone Manager</p>
-                    <p style="margin-bottom:5px;"><strong>Dept:</strong> Administrative</p>
-                    <p style="margin-bottom:5px;"><strong>Site:</strong> 45</p>
-                    <p style="margin-bottom:5px;"><strong>Status:</strong> <span style="color:green;">ACTIVE</span></p>
-                </div>
+        <div id="b-uplink-screen" class="screen">
+            <i class="fas fa-satellite-dish" style="font-size:5rem; margin-bottom:20px;"></i>
+            <h2>ESTABLISHING ENCRYPTED UPLINK...</h2>
+            <div style="width:400px; height:20px; border:1px solid #fff; margin-top:20px;">
+                <div id="b-load-bar" style="width:0%; height:100%; background:#fff;"></div>
+            </div>
+            <div id="b-load-text" style="margin-top:10px; color:#aaa;">Waiting...</div>
+        </div>
+
+        <div id="b-bios-screen" class="screen">
+            <div id="b-bios-text" style="font-family:monospace; width:800px; text-align:left;"></div>
+        </div>
+
+        <div id="b-login-screen" class="screen">
+            <div class="b-line-left"></div><div class="b-line-right"></div>
+            <div class="b-trapezoid">
+                <img data-src="https://github.com/Bapoooossssaaaa/Kael-Nicholas-Charles-OC/blob/main/SCiPnet%20(1).png?raw=true" class="b-trap-img">
             </div>
 
-            <div class="file-main">
-                <img src="https://github.com/Bapoooossssaaaa/WLOC/blob/main/Admin_old.webp?raw=true" class="logo-bg-watermark">
-                
-                <div class="file-top-nav">
-                    <div class="tab-btn active" onclick="switchTab('tab-gen')">Overview</div>
-                    <div class="tab-btn" onclick="switchTab('tab-back')">Background</div>
-                    <div class="tab-btn" onclick="switchTab('tab-rec')">Recruitment</div>
-                    <div class="tab-btn" onclick="switchTab('tab-inc')">Medical</div>
-                    <div class="tab-btn" onclick="switchTab('tab-morph')">Morph [WIP]</div>
-                </div>
-
-                <div id="tab-gen" class="tab-content active">
-                    <h1>KAEL “NICHOLAS” CHARLES</h1>
-                    <p><strong>Administrative Department, Installation Command, Site-45.</strong></p>
-                    
-                    <h2>Administrative Profile</h2>
-                    <p><strong>Zone Manager, High Containment Zone</strong></p>
-                    <p><strong>Clearance Level - 4/HCZ</strong></p>
-                    
-                    <h3 style="margin-top:2rem; color:#333;">Abilities</h3>
-                    <div style="margin-top:10px;">
-                        <span class="ability-tag"><i class="fas fa-lock"></i> Zone Lockdown</span>
-                        <span class="ability-tag"><i class="fas fa-truck-loading"></i> SCP Relocation</span>
-                        <span class="ability-tag"><i class="fas fa-user-shield"></i> Zone Authority</span>
-                        <span class="ability-tag"><i class="fas fa-sitemap"></i> Overall Management of HCZ</span>
-                    </div>
-                </div>
-
-                <div id="tab-back" class="tab-content">
-                    <h2>Short Birth Story</h2>
-                    <p><span class="hl">Kael Nicholas Charles</span> was born on <span class="hl-date">August 12, 1986</span>, in <span class="hl-date">Fairfax, VA</span>, to Thomas and Ellie Charles in an upper-class home. He had a brother named Reese who was in college at the time of his birth. His father was a retired <span class="hl-org">GS-14 Logistics Officer</span> for the <span class="hl-org">U.S. Department of Defense</span>, and his mother was a Public School Administrator in Fairfax County; both laid their years of knowledge and work onto him throughout his younger life. During his childhood, he didn’t see his brother too often, even after he finished college, nor did his parents talk about him much. Kael was saddened that he had never once gotten to see his older brother, which laid weight on him throughout his life. His father was mostly around and gave him knowledge of his days in the <span class="hl-org">Department of Defense</span>, especially regarding what he hated about his work.</p>
-                    
-                    <h2>Schooling/Work Experience</h2>
-                    <p>Kael attended <span class="hl-date">Woodson High School</span> and was keen on becoming a part of the school’s Student Government. He succeeded in this and even served as the President of Student Government during his junior year of high school. Academically, Kael was exceedingly easy to work with and did well in all of the classes he attended—some honors, some accelerated. After graduating high school in 2004, he was able to get a scholarship to <span class="hl-org">George Mason University</span>, earning a Master’s in Organization Development & Knowledge Management by 2010. He spent the next decade working for a private sector major defense contractor, <span class="hl-org">Booz Allen Hamilton</span>, in McLean, VA. He specialized in internal auditing and human resources for classified government projects. In 2016, after five years of strategic operations, Kael obtained his <span class="hl">Senior Certified Professional</span> credential from the <span class="hl-org">Society for Human Resource Management</span>. He also notably spearheaded a "Compliance Overhaul" for a 500-person logistics division, restructuring wage-and-hour auditing processes to eliminate legal liabilities before a federal review.</p>
-                </div>
-
-                <div id="tab-rec" class="tab-content">
-                    <h2>Foundation Discovery & Recruitment</h2>
-                    <p>By 2020, near the end of his contract, he caught the eye of an SCP Foundation Agent working deep cover in <span class="hl-org">Booz Allen Hamilton</span>: one <span class="hl">Alex V.</span>, disguised as a Junior IT Support Technician, but in reality, a member of the <span class="hl-org">Foundation’s Intelligence Network</span>. He wasn't there to recruit Kael initially; he was embedded in Booz Allen Hamilton to monitor a different executive suspected of selling classified logistics data to the <span class="hl">Chaos Insurgency</span>. That Senior Executive also fell under Kael's scrutiny during one of Kael’s audits. Kael was able to determine he was using a "Ghost Employee" scheme, creating fake employees on the payroll to funnel cash.</p>
-                    <p>Kael determined that if he flagged the account publicly, the executive would likely panic and purge the servers, destroying evidence and damaging the company. Instead, he opted to quietly quarantine the specific server cluster under the guise of a "Payroll System Update," and he physically walked down to the server room to authorize a hard lock on the drive. Afterward, he invited said Executive to a private meeting. He placed a single file on the desk: a pre-written Resignation Letter and a Non-Disclosure Agreement. He gave the Executive 10 minutes to sign both and leave the building, or else a special someone playing with company money would be reported to the FBI.</p>
-                    <p>Alex, watching via the network, realized Kael had inadvertently trapped the Foundation, too. When Kael locked the server to catch the thief, he locked the Agent out of his backdoor. It mattered little to the agent; the work was practically done for them. Kael was noted by the Foundation to have prioritized containment and silence instead of panicking or seeking glory. He effectively contained a breach and neutralized the threat without the public or even the wider company knowing. Two days after the Executive "retired for personal reasons," the Junior IT Tech, Alex, stopped by Kael’s office to "fix his email archive." While he worked on Kael’s terminal, Alex stopped for a moment, looked at Kael, and said:</p>
-                    
-                    <div class="quote-box">
-                        "Most people would have called the cops, Mr. Charles. But you knew that a police investigation would tank the stock price and lose the contract. You buried the body to save the house. We need people who know how to bury things."
-                    </div>
-
-                    <p>He then left a card that had a phone number on it, and three letters: <span class="hl">S.C.P.</span></p>
-                    <p>Kael made the smart move a day later and called the number. The man who answered spoke as if he had years of knowledge. <span class="hl">“Meet me at the Iwo Jima Memorial. North bench. Midnight. Come alone, or don't come at all.”</span></p>
-                    <p>Kael indeed arrived at midnight and saw a man in a suit and fedora sitting alone with a cigar in his mouth. The man laid a folder on the bench and left.</p>
-                    <p>The folder was substantially big, containing pages of questions about him and pages of files matching him and his identity, as if they had been watching his every move for years. At the bottom of the stack was a single, crisp document stamped with the seal of the <span class="hl-org">Administrative Department</span>. It listed no salary, only a Provisional Clearance Level and a directive: 'Report to <span class="hl-date">Dulles International Airport</span>, Private Hangar 4, at 0600 hours. Do not return home. Do not say goodbye. Your work begins now.' Before he closed the folder and got up, he saw a sticky note taped to the folder, and the words on it felt like the words he’d been wanting to hear all his years: ‘You want to see your brother after all these years, make the right choice.’</p>
-                    <p><span class="hl">Reese</span> had actually been working for the Foundation after college and seemed to have made quite a name for himself as the <span class="hl-org">Site Director for Site-15</span>. Kael was able to gain a spot serving under him and was able to converse with him plenty for the next four years of his employment in the Foundation’s Administrative Department. He didn’t do anything too important, just managing personnel files and paychecks, as well as dealing with concerns whenever necessary.</p>
-                </div>
-
-                <div id="tab-inc" class="tab-content">
-                    
-                    <div class="med-header">
-                        <h3>FOUNDATION MEDICAL SERVICES // SITE-15 INFIRMARY</h3>
-                        <small>PSYCHIATRIC EVALUATION DIVISION // CONFIDENTIAL</small>
-                    </div>
-                    
-                    <div class="med-grid">
-                        <div class="med-stamp">CLEARED FOR DUTY</div>
-
-                        <div class="med-label">REPORT TYPE:</div>
-                        <div class="med-val"><h2>PATIENT EVALUATION REPORT</h2></div>
-                        
-                        <div class="med-label">INCIDENT ID:</div>
-                        <div class="med-val">[REDACTED]</div>
-                        
-                        <div class="med-label">PATIENT:</div>
-                        <div class="med-val">CHARLES, KAEL (15-8944-DX)</div>
-                        
-                        <div class="med-label">ATTENDING PHYSICIAN:</div>
-                        <div class="med-val">Dr. Aristhrene</div>
-
-                        <div class="med-label">DATE:</div>
-                        <div class="med-val">2025-08-12</div>
-                        
-                        <div class="med-label">LOCATION:</div>
-                        <div class="med-val">Site-15 Medical Wing / Ward B</div>
-                        
-                        <div class="med-label">SYMPTOMS:</div>
-                        <div class="med-val">Acute Insomnia, Paranoia, Psychosis, Subjective feeling of "Loss"</div>
-                        
-                        <div class="med-label">OBSERVATIONS:</div>
-                        <div class="med-val">Subject reported a sudden sensation of loss, coinciding with the unexplained disappearance of Site Director Reese. Subject felt those two things were somehow related, yet couldn’t put his finger on it. It kept him sleepless for a few nights, and he was transferred to the site’s medical wing after showing signs of psychosis.</div>
-                        
-                        <div class="med-label">TREATMENT:</div>
-                        <div class="med-val">Sedatives administered. 30 Days monitoring.</div>
-                        
-                        <div class="med-label">CONCLUSION:</div>
-                        <div class="med-val">Recovered after a little over a month. Afterward, he was recommended for a vacant position at Site-45 as a High Containment Zone Manager given the resilience he showed in his recovery.</div>
-                    </div>
-                </div>
-
-                <div id="tab-morph" class="tab-content">
-                    <div class="full-center" style="height:50vh; border:2px dashed #555; color:#888;">
-                        <i class="fas fa-tools fa-3x" style="margin-bottom:20px;"></i>
-                        <h2>WORK IN PROGRESS</h2>
-                        <p>This module is currently under development by Site Engineering.</p>
-                        <small>ERR_MODULE_NOT_LOADED</small>
-                    </div>
-                </div>
-
+            <div class="b-login-box">
+                <h2>USER AUTHENTICATION</h2>
+                <input type="password" value="********" class="input-field" style="text-align:center; font-size:1.5rem; margin:20px 0;">
+                <button class="b-connect-btn" onclick="sysB_Enter()">UNLOCK</button>
             </div>
         </div>
+
+        <div id="b-main-screen" class="screen">
+            <div class="b-line-left"></div><div class="b-line-right"></div>
+            <div class="b-trapezoid">
+                <img data-src="https://github.com/Bapoooossssaaaa/Kael-Nicholas-Charles-OC/blob/main/SCiPnet%20(1).png?raw=true" class="b-trap-img">
+            </div>
+
+            <div class="b-center">
+                <div id="b-console-wrapper">
+                    <div id="b-console-output">
+                        <div>SCiPnet TERMINAL [VERSION 2.4]</div>
+                        <div>(c) 2025 Secure Command. Type 'help' for commands.</div>
+                        <br>
+                    </div>
+                    <div style="display:flex; align-items:center; color:#fff; font-family: monospace; font-size: 1.1rem;">
+                        <span>admin@site45:~$&nbsp;</span>
+                        <input type="text" id="b-console-input" style="background:transparent; border:none; color:#fff; flex:1; font-family: monospace; font-size: 1.1rem; outline:none;" autocomplete="off" autofocus>
+                    </div>
+                </div>
+
+                <div id="b-keypad-game">
+                    <div class="keypad-status" id="keypad-status">SEQUENCE: 0/5</div>
+                    <div class="keypad-grid">
+                        <div class="keypad-btn" onclick="checkKey(1)" id="key-1">1</div>
+                        <div class="keypad-btn" onclick="checkKey(2)" id="key-2">2</div>
+                        <div class="keypad-btn" onclick="checkKey(3)" id="key-3">3</div>
+                        <div class="keypad-btn" onclick="checkKey(4)" id="key-4">4</div>
+                        <div class="keypad-btn" onclick="checkKey(5)" id="key-5">5</div>
+                        <div class="keypad-btn" onclick="checkKey(6)" id="key-6">6</div>
+                        <div class="keypad-btn" onclick="checkKey(7)" id="key-7">7</div>
+                        <div class="keypad-btn" onclick="checkKey(8)" id="key-8">8</div>
+                        <div class="keypad-btn" onclick="checkKey(9)" id="key-9">9</div>
+                        <div class="keypad-btn" onclick="checkKey(0)" id="key-0" style="grid-column: span 3;">0</div>
+                    </div>
+                </div>
+
+                <div id="b-secret-file">
+                    <div style="display:flex; justify-content:space-between; align-items:center; background:#111; padding:15px; border-bottom:2px solid #fff;">
+                        <h2 style="font-size:1.2rem; color:#fff; margin:0; letter-spacing: 2px;">KAEL'S PERSONAL FILE // ID: 8944-DX</h2>
+                        <button onclick="closeSecretFile()" style="background:#fff; color:#000; border:none; padding:5px 10px; font-weight:bold; cursor:pointer;">CLOSE X</button>
+                    </div>
+                    
+                    <div class="sf-tabs">
+                        <div class="sf-tab-btn active" onclick="switchSfTab('sf-perf', this)">PERFORMANCE REVIEW</div>
+                        <div class="sf-tab-btn" onclick="switchSfTab('sf-waiver', this)">LIABILITY WAIVER</div>
+                    </div>
+
+                    <div class="sf-content">
+                        
+                        <div id="sf-perf">
+                            <p class="sf-intro">
+                                During Kael’s Career serving under Site Director Reese in the Administrative Department at Site-15, he handled mostly boring paperwork like payroll, personnel files, and staff complaints. However, he used the same auditing skills from his corporate job to find problems that everyone else missed.
+                            </p>
+
+                            <div class="sf-entry border-green">
+                                <div class="sf-icon"><i class="fas fa-box-open"></i></div>
+                                <div class="sf-text">
+                                    <strong style="color:lime;">LOGISTICS AUDIT:</strong><br>
+                                    While checking pay requests for security guards, he noticed the numbers for ammunition use didn't match the training logs. He dug into the files and found a math error in the supply orders, revealing the containment wing was actually 15% short on ammo reserves. He fixed the error and got the armory restocked just weeks before a containment breach happened. Because of him, the guards had enough supplies to stop the threat.
+                                </div>
+                            </div>
+
+                            <div class="sf-entry border-orange">
+                                <div class="sf-icon"><i class="fas fa-clock"></i></div>
+                                <div class="sf-text">
+                                    <strong style="color:orange;">SCHEDULING OVERHAUL:</strong><br>
+                                    He also looked at the schedules for researchers working with dangerous SCPs and realized most accidents happened when staff were tired. He wrote a new rule that forced the payroll system to lock people out if they worked too many hours without a break. This simple change cut down on accidental breaches by 30% the next year.
+                                </div>
+                            </div>
+
+                            <div class="sf-entry border-blue">
+                                <div class="sf-icon"><i class="fas fa-angles-up"></i></div>
+                                <div class="sf-text">
+                                    <strong style="color:#00aaff;">PROMOTION REVIEW:</strong><br>
+                                    When he was cleared for duty, Foundation Command reviewed his file. They noticed that even when he was mentally unstable, he never leaked secrets or broke security rules. They saw he was resilient and knew how to manage dangerous logistics. They recommended him for an open spot at Site-45 as the High Containment Zone Manager. They told him the job was serious and dangerous. He accepted it, and he has worked there ever since.
+                                </div>
+                            </div>
+                        </div>
+
+                        <div id="sf-waiver" style="display:none; text-align:center; height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center;">
+                            <img id="waiver-preview" src="https://github.com/Bapoooossssaaaa/Kael-Nicholas-Charles-OC/blob/main/445p6k79g%20-%20HTML%20-%20OneCompiler-1.png?raw=true" onclick="openZoom(this.src)">
+                            <button class="sf-zoom-btn" onclick="openZoom(document.getElementById('waiver-preview').src)">[+] ZOOM DOCUMENT</button>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="b-sidebar">
+                <div class="b-widget">
+                    <h4>NETWORK STATUS</h4>
+                    <div class="b-text-status">
+                        > ENCRYPTION: AES-256<br>
+                        > PORT: 8080 [SECURE]<br>
+                        > UPLINK: STABLE<br>
+                        > NODE: K-45-ALPHA
+                    </div>
+                </div>
+                <div class="b-widget">
+                    <h4>GLOBAL SURVEILLANCE</h4>
+                    <img data-src="https://github.com/Bapoooossssaaaa/Kael-Nicholas-Charles-OC/blob/main/3dgifmaker51756.gif?raw=true">
+                </div>
+                <div class="b-widget">
+                    <h4>LOCAL RADAR</h4>
+                    <img data-src="https://github.com/Bapoooossssaaaa/Kael-Nicholas-Charles-OC/blob/main/ezgif-64d96c108b8dc363-ezgif.com-speed%20(1).gif?raw=true">
+                </div>
+                <div class="b-widget" style="align-items: center;">
+                    <h4>TELEMETRY</h4>
+                    <div style="font-size:0.8rem; color:#fff; width: 100%; text-align: left;">
+                        LAT: 49.0021° N<br>
+                        LON: 108.3210° W<br>
+                        LOC: SOUTHERN CANADA<br>
+                    </div>
+                    <div id="b-clock-display" class="b-clock">00:00:00</div>
+                </div>
+            </div>
+        </div>
+
     </div>
 
     <script>
         const wait = (ms) => new Promise(resolve => setTimeout(resolve, ms));
-        let currentScreen = 'remote-screen';
+        let currentScreen = 'a-remote-screen';
+
+        function updateTime() {
+            const now = new Date();
+            const timeStr = now.toISOString().replace('T', ' ').substring(0, 19) + " UTC";
+            
+            document.querySelectorAll('.time-display').forEach(el => el.innerText = timeStr);
+            
+            const bClock = document.getElementById('b-clock-display');
+            if(bClock) {
+                const hours = String(now.getUTCHours()).padStart(2, '0');
+                const minutes = String(now.getUTCMinutes()).padStart(2, '0');
+                const seconds = String(now.getUTCSeconds()).padStart(2, '0');
+                bClock.innerText = `${hours}:${minutes}:${seconds}`;
+            }
+        }
+        setInterval(updateTime, 1000);
+        updateTime();
+
+        function openZoom(src) {
+            const modal = document.getElementById('zoom-modal');
+            const img = document.getElementById('zoom-img');
+            img.src = src;
+            modal.style.display = 'flex';
+        }
+        function closeZoom() {
+            document.getElementById('zoom-modal').style.display = 'none';
+        }
+
+        const abilityData = {
+            1: {
+                title: "ZONE LOCKDOWN PROTOCOLS",
+                desc: "Zone Managers are authorized to initiate a lockdown of their designated sector in the event of a containment breach or hostile incursion. During a lockdown, access to the sector is strictly restricted; only personnel possessing specific Containment Clearance relevant to the active breach will be permitted entry.\n\nImplementation: This may be enacted via direct request from SSUH or SMOD, utilizing the following announcement format:\n\nCommand (Radio & PM): ;pm all \"[SITE PA SYSTEM]: The SCHZ/HCZ has been placed under lockdown by Installation Command until further notice. Only authorized Containment Teams are permitted to enter the sector at this time. — Installation Command\""
+            },
+            2: {
+                title: "SCP RELOCATION PROTOCOLS",
+                desc: "Zone Managers may authorize the relocation of SCP objects within the HCZ/SHCZ to alternative containment units if deemed necessary for operational security or containment efficacy (e.g., transferring an entity to a cell better suited for its containment needs).\n\nCommand (PM Only): ;pm all \"[SITE PA SYSTEM]: SCP-#### is being relocated to [Insert Cell] as per the request of Installation Command.\""
+            },
+            3: {
+                title: "ZONE AUTHORITY",
+                desc: "As the designated Zone Manager for the HCZ/SHCZ, Charles possesses absolute authority over operations within his sector. This authority is superseded only by the Site Director, O5 Command, or the Office of The Administrator (OoTA)."
+            },
+            4: {
+                title: "OVERALL MANAGEMENT & LIABILITY",
+                desc: "Charles assumes full responsibility for the containment of SCP objects, facility upkeep, security protocols, and logistics within his assigned sector. In accordance with Ethics Committee regulations, he has executed a liability waiver acknowledging full accountability for any containment breaches, personnel casualties, or structural damages that occur under his supervision."
+            },
+            5: {
+                title: "DETAIN TOOL PERMIT",
+                desc: "Permitted Detain tool during removal of personnel from HCZ,SHCZ during Lockdown, non-compliant personnel removal, etc."
+            },
+            6: {
+                title: "WEAPON PERMIT",
+                desc: "Permitted Mp7 & M9 for self defense, granted dangers of work in HCZ & SHCZ."
+            },
+            7: {
+                title: "FOUNDATION ISSUE TABLET",
+                desc: "Granted Kael manages a significant part of the site, he should have access to security cams, site monitoring etc."
+            }
+        };
+
+        function showAbility(id) {
+            const modal = document.getElementById('ability-modal');
+            const title = document.getElementById('modal-title');
+            const desc = document.getElementById('modal-desc');
+            
+            if(abilityData[id]) {
+                title.innerText = abilityData[id].title;
+                desc.innerText = abilityData[id].desc;
+                modal.style.display = 'flex';
+            }
+        }
+
+        function closeModal() {
+            document.getElementById('ability-modal').style.display = 'none';
+        }
+
+        const consoleInput = document.getElementById('b-console-input');
+        const consoleOutput = document.getElementById('b-console-output');
+        
+        if(consoleInput) {
+            consoleInput.addEventListener('keydown', function(e) {
+                if(e.key === 'Enter') {
+                    processCommand(this.value);
+                    this.value = '';
+                }
+            });
+        }
+
+        function printToConsole(text, isCmd = false) {
+            const line = document.createElement('div');
+            if(isCmd) {
+                line.className = 'cmd-line';
+                line.innerText = `admin@site45:~$ ${text}`;
+            } else {
+                line.className = 'cmd-response';
+                line.innerText = text;
+            }
+            consoleOutput.appendChild(line);
+            consoleOutput.scrollTop = consoleOutput.scrollHeight;
+        }
+
+        function processCommand(cmd) {
+            const cleanCmd = cmd.trim().toLowerCase();
+            printToConsole(cleanCmd, true);
+
+            if(cleanCmd === 'help') {
+                printToConsole("AVAILABLE COMMANDS:");
+                printToConsole("- help : Show this list");
+                printToConsole("- scan : Scan local files for integrity");
+                printToConsole("- clear : Clear terminal screen");
+                printToConsole("- login : Access secure file storage");
+                printToConsole("- exit : Logout and return to terminal");
+            } else if(cleanCmd === 'scan' || cleanCmd === 'filescan') {
+                printToConsole("Scanning drive Z:/ ...");
+                setTimeout(() => printToConsole("Scan Complete. No malware detected."), 1000);
+            } else if(cleanCmd === 'clear' || cleanCmd === 'cls') {
+                consoleOutput.innerHTML = '';
+            } else if(cleanCmd === 'login') {
+                startKeypadGame();
+            } else if(cleanCmd === 'exit' || cleanCmd === 'logout') {
+                exitSystemB();
+            } else if(cleanCmd === '') {
+                
+            } else {
+                printToConsole(`Command not found: ${cleanCmd}`);
+            }
+        }
+
+        function exitSystemB() {
+            document.getElementById('system-b').style.display = 'none';
+            document.getElementById('system-a').style.display = 'block';
+            switchScreen('a-file-screen');
+            
+            document.getElementById('b-main-screen').classList.remove('active');
+            document.getElementById('b-console-wrapper').style.display = 'flex';
+            document.getElementById('b-keypad-game').style.display = 'none';
+            document.getElementById('b-secret-file').style.display = 'none';
+        }
+
+        const secretCode = [3, 8, 1, 6, 9];
+        let gameSequence = 0;
+        let currentTarget = -1;
+        let hintInterval = null;
+
+        function startKeypadGame() {
+            printToConsole("INITIATING SECURITY CHALLENGE...");
+            setTimeout(() => {
+                document.getElementById('b-console-wrapper').style.display = 'none';
+                document.getElementById('b-keypad-game').style.display = 'flex';
+                gameSequence = 0;
+                
+                if(hintInterval) clearInterval(hintInterval);
+                
+                updateGameStatus();
+                nextKey();
+                
+                hintInterval = setInterval(blinkCorrectKey, 1500);
+            }, 1000);
+        }
+
+        function updateGameStatus() {
+            document.getElementById('keypad-status').innerText = `SEQUENCE: ${gameSequence}/5`;
+        }
+
+        function nextKey() {
+            currentTarget = secretCode[gameSequence];
+        }
+        
+        function blinkCorrectKey() {
+            const btn = document.getElementById(`key-${currentTarget}`);
+            if(btn) {
+                btn.classList.add('blink-hint');
+                setTimeout(() => {
+                    btn.classList.remove('blink-hint');
+                }, 200); 
+            }
+        }
+
+        function checkKey(num) {
+            if(num === currentTarget) {
+                gameSequence++;
+                updateGameStatus();
+                if(gameSequence >= 5) {
+                    winGame();
+                } else {
+                    nextKey();
+                }
+            } else {
+                alert("INCORRECT KEY. SEQUENCE RESET.");
+                gameSequence = 0;
+                updateGameStatus();
+                nextKey();
+            }
+        }
+
+        function winGame() {
+            if(hintInterval) clearInterval(hintInterval);
+            document.getElementById('b-keypad-game').style.display = 'none';
+            document.getElementById('b-secret-file').style.display = 'flex';
+            switchSfTab('sf-perf', document.querySelector('.sf-tab-btn.active'));
+        }
+
+        function closeSecretFile() {
+            document.getElementById('b-secret-file').style.display = 'none';
+            document.getElementById('b-console-wrapper').style.display = 'flex';
+            printToConsole("ACCESS GRANTED. File closed.");
+        }
+
+        window.switchSfTab = function(tabId, btn) {
+            document.getElementById('sf-perf').style.display = 'none';
+            document.getElementById('sf-waiver').style.display = 'none';
+            
+            const target = document.getElementById(tabId);
+            if(tabId === 'sf-waiver') {
+                target.style.display = 'flex';
+            } else {
+                target.style.display = 'block';
+            }
+            
+            document.querySelectorAll('.sf-tab-btn').forEach(el => el.classList.remove('active'));
+            btn.classList.add('active');
+        }
 
         function switchScreen(nextId) {
             const current = document.getElementById(currentScreen);
@@ -544,20 +1046,9 @@
             }, 500);
         }
 
-        function updateTime() {
-            const now = new Date();
-            const timeStr = now.toISOString().replace('T', ' ').substring(0, 19) + " UTC";
-            for(let i=1; i<=4; i++) {
-                const el = document.getElementById(`time-${i}`);
-                if(el) el.innerText = timeStr;
-            }
-        }
-        setInterval(updateTime, 1000);
-        updateTime();
-
-        async function startSequence() {
-            const bar = document.getElementById('remote-bar');
-            const text = document.getElementById('remote-text');
+        async function sysA_Start() {
+            const bar = document.getElementById('a-remote-bar');
+            const text = document.getElementById('a-remote-text');
             
             await wait(1000);
             bar.style.width = "30%"; text.innerText = "Handshake Verified...";
@@ -567,14 +1058,14 @@
             bar.style.width = "100%"; text.innerText = "Connected.";
             await wait(1000);
             
-            switchScreen('bios-screen');
-            runBios();
+            switchScreen('a-bios-screen');
+            sysA_RunBios();
         }
 
-        async function runBios() {
+        async function sysA_RunBios() {
             const lines = [
                 "SCiPnet BIOS v5.4.1 (Build 9924)",
-                "Copyright (C) 1998-2024 Foundation Tech",
+                "Copyright (C) 1998-2025 Foundation Tech",
                 "-----------------------------------------",
                 "CPU 0: Intel Xeon Gold @ 4.2GHz ... OK",
                 "CPU 1: Intel Xeon Gold @ 4.2GHz ... OK",
@@ -595,26 +1086,26 @@
                 " > UI Compositor... OK",
                 "System Ready."
             ];
-            const container = document.getElementById('bios-content');
+            const container = document.getElementById('a-bios-content');
             await wait(500);
             for(let line of lines) {
                 const div = document.createElement('div');
                 div.className = 'bios-line';
                 div.innerText = `> ${line}`;
                 container.appendChild(div);
-                await wait(100 + Math.random()*300); 
+                await wait(100 + Math.random()*200); 
             }
             await wait(1500);
-            switchScreen('login-screen');
-            runLoginType();
+            switchScreen('a-login-screen');
+            sysA_TypeLogin();
         }
 
-        async function runLoginType() {
+        async function sysA_TypeLogin() {
             await wait(1000);
-            await type('login-user', '8944-DX-ADMIN'); 
+            await type('a-user', '8944-DX-ADMIN'); 
             await wait(500);
-            await type('login-pass', '**********');
-            document.getElementById('login-status').innerText = "WAITING FOR AUTHORIZATION...";
+            await type('a-pass', '**********');
+            document.getElementById('a-status').innerText = "WAITING FOR AUTHORIZATION...";
         }
 
         async function type(id, text) {
@@ -625,25 +1116,23 @@
             }
         }
 
-        function authorizeLogin() {
-            console.log("Login Clicked"); 
-            const btn = document.getElementById('login-btn');
+        function sysA_Auth() {
+            const btn = document.getElementById('a-btn');
             btn.innerText = "AUTHENTICATING...";
             btn.style.background = "#fff";
             setTimeout(() => {
-                switchScreen('network-screen');
+                switchScreen('a-net-screen');
             }, 1000);
         }
 
-        function enterAdmin() {
-            switchScreen('database-screen');
-            populateDB();
+        function sysA_EnterAdmin() {
+            switchScreen('a-db-screen');
+            sysA_PopulateDB();
         }
 
-        async function populateDB() {
-            const list = document.getElementById('file-list');
+        async function sysA_PopulateDB() {
+            const list = document.getElementById('a-file-list');
             list.innerHTML = '';
-            
             const depts = ['SEC', 'LOG', 'RES', 'MTF', 'MED', 'ENG'];
             const statuses = ['ERR', 'LCK', 'DEL', 'CORRUPT'];
             const files = [];
@@ -651,43 +1140,20 @@
             for(let i=0; i<30; i++) {
                 const id = `45-${depts[Math.floor(Math.random()*depts.length)]}-${Math.floor(Math.random()*900)+100}`;
                 const status = statuses[Math.floor(Math.random()*statuses.length)];
-                files.push({
-                    id: id,
-                    name: `Encrypted File Record #${Math.floor(Math.random()*9999)}`,
-                    status: status,
-                    col: 'red',
-                    active: false
-                });
+                files.push({ id: id, name: `Encrypted File Record #${Math.floor(Math.random()*9999)}`, status: status, col: 'red', active: false });
             }
 
-            const targetFile = {
-                id: '45-ADMIN-KC', 
-                name: 'CHARLES, KAEL - PERSONNEL FILE', 
-                status: 'OK', 
-                col: 'lime', 
-                active: true
-            };
-            
+            const targetFile = { id: '45-ADMIN-KC', name: 'CHARLES, KAEL - PERSONNEL FILE', status: 'OK', col: 'lime', active: true };
             files.splice(12, 0, targetFile);
             
             await wait(500);
             files.forEach(f => {
                 const row = document.createElement('div');
                 row.className = `file-row ${f.active ? 'selectable highlight-green' : ''}`;
-                row.innerHTML = `
-                    <span style="width:80px; color:${f.col}">[${f.status}]</span>
-                    <span style="width:140px;">${f.id}</span>
-                    <span>${f.name}</span>
-                `;
-                if(f.active) {
-                    row.onclick = () => openFile();
-                }
+                row.innerHTML = `<span class="file-tag" style="color:${f.col}">[${f.status}]</span><span style="flex: 1;">${f.id}</span><span style="flex: 2;">${f.name}</span>`;
+                if(f.active) row.onclick = () => switchScreen('a-file-screen');
                 list.appendChild(row);
             });
-        }
-
-        function openFile() {
-            switchScreen('file-screen');
         }
 
         window.switchTab = function(tabId) {
@@ -697,7 +1163,86 @@
             event.target.classList.add('active');
         }
 
-        window.onload = startSequence;
+        function breachSystem() {
+            document.getElementById('system-a').style.display = 'none';
+            document.getElementById('system-b').style.display = 'block';
+            document.getElementById('b-start-screen').classList.add('active');
+        }
+
+        function jumpTo(currentId, nextId) {
+            document.getElementById(currentId).classList.remove('active');
+            const next = document.getElementById(nextId);
+            next.classList.add('active');
+            next.classList.add('jump-cut'); 
+            next.style.opacity = '1';
+        }
+
+        async function sysB_Init() {
+            jumpTo('b-start-screen', 'b-uplink-screen');
+            
+            const bar = document.getElementById('b-load-bar');
+            const txt = document.getElementById('b-load-text');
+            
+            txt.innerText = "Ping: 14ms. Target Acquired.";
+            await wait(800);
+            bar.style.width = "30%"; 
+            txt.innerText = "Bypassing Firewall Layer 1...";
+            await wait(1200);
+            bar.style.width = "60%"; 
+            txt.innerText = "Decrypting RSA-4096 Keys...";
+            await wait(1200);
+            bar.style.width = "90%"; 
+            txt.innerText = "Handshake Accepted. Secure Tunnel Open.";
+            await wait(800);
+            bar.style.width = "100%"; 
+            
+            sysB_RunBios();
+        }
+
+        async function sysB_RunBios() {
+            jumpTo('b-uplink-screen', 'b-bios-screen');
+            
+            const container = document.getElementById('b-bios-text');
+            container.innerHTML = "";
+            const lines = [
+                "SCiPnet SECURE BOOTLOADER v2.4",
+                "Checking Integrity... OK",
+                "Loading Kernel... OK",
+                "Mounting Encrypted Drive (Z:/)... OK",
+                "Loading User Profile: KAEL.CHARLES",
+                "Initializing Graphical Subsystem...",
+                "Loading Widget Framework...",
+                "Connecting to Surveillance Grid...",
+                "SYSTEM READY."
+            ];
+
+            await wait(500);
+            for(let line of lines) {
+                container.innerHTML += `<div>> ${line}</div>`;
+                await wait(400);
+            }
+            await wait(1000);
+            
+            sysB_Login();
+        }
+
+        function sysB_Login() {
+            jumpTo('b-bios-screen', 'b-login-screen');
+            loadBAssets(); 
+        }
+
+        function sysB_Enter() {
+            jumpTo('b-login-screen', 'b-main-screen');
+        }
+
+        function loadBAssets() {
+            document.querySelectorAll('img[data-src]').forEach(img => {
+                img.src = img.dataset.src;
+                img.removeAttribute('data-src');
+            });
+        }
+
+        window.onload = sysA_Start;
     </script>
 </body>
 </html>
